@@ -1,13 +1,14 @@
 package ss3_mang.bai_tap;
 import java.util.Scanner;
+import  ss3_mang.common_method.ArrayCommonMethod;
 
 public class DeleteArr {
     public static void main(String[] args) {
-        int[] arr = inputArr(5);
+        int[] arr = ArrayCommonMethod.inputArr(5);
         int[] arrs;
         byte count = 0 ;
         Scanner sc = new Scanner(System.in);
-        displayArr(arr);
+        ArrayCommonMethod.displayArr(arr);
         System.out.println("nhap gia tri can xoa");
         int valueDelete= sc.nextInt();
         for(int i = 0 ; i<arr.length;i++){
@@ -22,21 +23,7 @@ public class DeleteArr {
             if(arr[i]==valueDelete) continue;
             arrs[j++]= arr[i];
         }
-        displayArr(arrs);
+        ArrayCommonMethod.displayArr(arrs);
     }
-    public static void displayArr(int[] arr){
-        System.out.print("Mang cua ban la: ");
-        for (int a:arr) {
-            System.out.print(a+" ");
-        }
-    }
-    public static int[] inputArr(int n){
-        Scanner sc = new Scanner(System.in);
-        int[] arr= new int[n];
-        for(int i =0;i<n;i++){
-            System.out.println("nhap phan tu thu "+i);
-            arr[i]=sc.nextInt();
-        }
-        return arr;
-    }
+
 }

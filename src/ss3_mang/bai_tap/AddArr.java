@@ -1,19 +1,18 @@
 package ss3_mang.bai_tap;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
+import ss3_mang.common_method.ArrayCommonMethod;
 
 public class AddArr {
     public static void main(String[] args) {
-        int[] arr = inputArr(5);
+        int[] arr = ArrayCommonMethod.inputArr(5);
         Scanner sc = new Scanner(System.in);
-        displayArr(arr);
+        ArrayCommonMethod.displayArr(arr);
         System.out.println("nhap gia tri chen");
         int valueAdd= sc.nextInt();
         System.out.println("nhap vi tri can chen");
         int index = sc.nextInt();
         if(index<0||index>arr.length){
-            displayArr(arr);
+            ArrayCommonMethod.displayArr(arr);
             return;
         }else{
             int[] arrs = new int[arr.length+1];
@@ -24,23 +23,8 @@ public class AddArr {
                     arrs[i]= arr[j++];
                 }
             }
-            displayArr(arrs);
+            ArrayCommonMethod.displayArr(arrs);
         }
     }
-    public static void displayArr(int[] arr){
-        System.out.print("Mang cua ban la: ");
-        for (int a:arr) {
 
-            System.out.print(a+" ");
-        }
-    }
-    public static int[] inputArr(int n){
-        Scanner sc = new Scanner(System.in);
-        int[] arr= new int[n];
-        for(int i =0;i<n;i++){
-            System.out.println("nhap phan tu thu "+i);
-            arr[i]=sc.nextInt();
-        }
-        return arr;
-    }
 }

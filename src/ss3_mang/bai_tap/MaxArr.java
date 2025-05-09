@@ -7,7 +7,5 @@ public class MaxArr {
         int[] indexes = ArrayCommonMethod.maxArrTow(arr);
         System.out.print("phan tu lon nhat la : ");
         System.out.println(arr[indexes[0]][indexes[1]]);
-
-
     }
 }

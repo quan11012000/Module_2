@@ -131,4 +131,14 @@ public class ArrayCommonMethod {
         System.out.printf ("tong cot thu %d la : ",column);
         return sum;
     }
+    public static boolean prime(int number){
+        if(number<2){
+            return false;
+        }else{
+            for (int i=2 ; i<= Math.sqrt(number);i++){
+                if(number%i==0) return false;
+            }
+        }
+        return true;
+    }
 }

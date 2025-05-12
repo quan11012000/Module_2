@@ -1,4 +1,4 @@
-package ss4_Oop.thuc_hanh;
+package ss4_Oop.thuc_hanh.rectabggke;
 
 import java.util.Scanner;
 

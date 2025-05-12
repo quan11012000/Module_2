@@ -128,7 +128,6 @@ public class ArrayCommonMethod {
                         sum+=arr[i][j];
                 }
         }
-
         System.out.printf ("tong cot thu %d la : ",column);
         return sum;
     }

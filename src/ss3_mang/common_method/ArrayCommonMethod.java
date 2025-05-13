@@ -123,10 +123,7 @@ public class ArrayCommonMethod {
             column =sc.nextInt();
         }while (column <0 || column >=arr[0].length);
         for(int i=0;i<arr.length;i++){
-                for(int j=0;j<arr[i].length;j++){
-                    if(j==column)
-                        sum+=arr[i][j];
-                }
+                        sum+=arr[i][i];
         }
         System.out.printf ("tong cot thu %d la : ",column);
         return sum;

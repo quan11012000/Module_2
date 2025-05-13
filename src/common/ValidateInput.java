@@ -1,12 +1,15 @@
-package ss4_Oop.thuc_hanh.student;
+package common;
+import ss4_Oop.thuc_hanh.student.Student;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
+import java.util.Scanner;
 
 public class ValidateInput {
     // check so thuc
-    public static boolean isNumber(String input) {
+    public static boolean isDouble(String input) {
         try {
             Double.parseDouble(input);
             return true;
@@ -54,5 +57,23 @@ public class ValidateInput {
     public static boolean isValidPhoneNumber(String phone) {
         // Định dạng số điện thoại Việt Nam: bắt đầu với 0, sau đó là 9 số.
         return phone.matches("^0(3|5|7|8|9)[0-9]{8}$");
+    }
+    public static double inputDouble(Scanner scanner, String message) {
+        double value;
+        while (true) {
+            System.out.print(message);
+            String input = scanner.nextLine();
+            try {
+                value = Double.parseDouble(input);
+                if (value>1000||value<-1000) {
+                    System.out.println("Giá trị không hợp lệ. Vui lòng nhập lại.");
+                    continue;
+                }
+                break; // nhập đúng
+            } catch (NumberFormatException e) {
+                System.out.println("Không phải số hợp lệ. Vui lòng nhập lại.");
+            }
+        }
+        return value;
     }
 }

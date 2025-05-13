@@ -1,4 +1,4 @@
-package ss3_mang.common_method;
+package common;
 import java.util.Scanner;
 
 public class ArrayCommonMethod {

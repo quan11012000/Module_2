@@ -53,23 +53,29 @@ public class Fan {
         this.color = color;
     }
     public Fan(){
-
     }
-
     public Fan(int speed, boolean on, double radius, String color) {
         this.speed = speed;
         this.on = on;
         this.radius = radius;
         this.color = color;
     }
-
     @Override
     public String toString() {
-        return "Fan{" +
-                "speed=" + speed +
-                ", radius=" + radius +
-                ", color='" + color + '\'' +
-                ", fan is " + (on?"on":"off")+
-                '}';
+        if(on){
+            return "Fan{" +
+                    "speed=" + speed +
+                    ", radius=" + radius +
+                    ", color='" + color + '\'' +
+                    ", fan is on" +
+                    '}';
+        }else{
+            return "Fan{" +
+                    "radius=" + radius +
+                    ", color='" + color + '\'' +
+                    ", fan is off" +
+                    '}';
+        }
+
     }
 }

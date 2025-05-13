@@ -1,6 +1,6 @@
 package ss3_mang.bai_tap;
 import java.util.Scanner;
-import  ss3_mang.common_method.ArrayCommonMethod;
+import common.ArrayCommonMethod;
 
 public class DeleteArr {
     public static void main(String[] args) {

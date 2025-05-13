@@ -1,5 +1,5 @@
 package ss4_Oop.bai_tap.quadraticequation;
-
+import common.ValidateInput;
 import java.util.Scanner;
 
 public class Main {
@@ -8,14 +8,10 @@ public class Main {
         double b;
         double c;
         Scanner sc = new Scanner(System.in);
-        System.out.print("Nhap a: ");
-        a=sc.nextDouble();
-        System.out.print("Nhap b: ");
-        b=sc.nextDouble();
-        System.out.print("Nhap c: ");
-        c=sc.nextDouble();
+        a=ValidateInput.inputDouble(sc,"Nhap a: ");
+        b=ValidateInput.inputDouble(sc,"Nhap b: ");
+        c=ValidateInput.inputDouble(sc,"Nhap c: ");
         QuadraticEquation quadraticEquation = new QuadraticEquation(a,b,c);
         quadraticEquation.solve();
-
     }
 }

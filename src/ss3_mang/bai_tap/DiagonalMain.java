@@ -1,5 +1,5 @@
 package ss3_mang.bai_tap;
-import ss3_mang.common_method.ArrayCommonMethod;
+import common.ArrayCommonMethod;
 
 import java.util.Scanner;
 

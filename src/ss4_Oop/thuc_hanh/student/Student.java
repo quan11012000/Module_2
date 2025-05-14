@@ -4,13 +4,13 @@ import java.time.LocalDate;
 import java.util.SplittableRandom;
 
 public class Student {
-    long code;
+    private long code;
 
-    String name;
-    String phoneNumber;
-    LocalDate dob ;
-    String address;
-    Boolean gender;
+    private String name;
+    private String phoneNumber;
+    private LocalDate dob ;
+    private String address;
+    private Boolean gender;
     public Student(){
 
     }

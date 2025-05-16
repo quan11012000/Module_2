@@ -33,7 +33,7 @@ public class Rectangle extends Shape implements Resizeable {
     public void setLength(double length) {
         this.length = length;
     }
-
+    @Override
     public double getArea() {
         return width * this.length;
     }
@@ -42,17 +42,18 @@ public class Rectangle extends Shape implements Resizeable {
         return 2 * (width + this.length);
     }
 
-    @Override
+    /*@Override
     public String toString() {
         return "A Rectangle with width= "
                 + String.format("%.2f", getWidth())      // làm tròn width
                 + " and length= "
                 + String.format("%.2f", getLength())     // làm tròn length
                 + " | Area= "
-                + String.format("%.2f", getArea());      // làm tròn diện tích
+                + String.format("%.2f", getArea());
+                // làm tròn diện tích
     }
                // + ", which is a subclass of "
-                //+ super.toString();
+                //+ super.toString();*/
     @Override
     public void resize(int percent) {
         width = width+ (width*percent/100);

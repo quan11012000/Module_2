@@ -33,7 +33,6 @@ public class Square extends Rectangle implements Resizeable, Colorable {
     public void setLength(double length) {
         setSide(length);
     }
-
     @Override
     public String toString() {
         return "A Square with side= "

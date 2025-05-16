@@ -77,7 +77,13 @@ public class ArrayCommonMethod {
         }
         return new int[]{indexRow, indexCol};
     }
-
+    public static int sumArrRecursive(int[] array,int n){
+        if(n==0){
+            return 0;
+        }else{
+            return array[n-1]+sumArrRecursive(array,n-1);
+        }
+    }
     public static int[] minArrTow(int[][] array) {
         int min = array[0][0];
         int indexRow = 0;

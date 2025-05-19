@@ -1,17 +1,15 @@
-package ss4_Oop.thuc_hanh.student;
+package ss4_Oop.thuc_hanh.student.view;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import common.ValidateInput;
+import ss4_Oop.thuc_hanh.student.model.Student;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Scanner;
 
-public class StudentService {
+public class StudentView {
     public static Student createStudent(ArrayList<Student> students) {
         Scanner sc = new Scanner(System.in);
         String code, name, phone, dob, address;

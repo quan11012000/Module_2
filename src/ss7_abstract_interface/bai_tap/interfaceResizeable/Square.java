@@ -25,15 +25,6 @@ public class Square extends Rectangle implements Resizeable, Colorable {
     }
 
     @Override
-    public void setWidth(double width) {
-        setSide(width);
-    }
-
-    @Override
-    public void setLength(double length) {
-        setSide(length);
-    }
-    @Override
     public String toString() {
         return "A Square with side= "
                 + String.format("%.2f", getSide())   // 2 chữ số thập phân

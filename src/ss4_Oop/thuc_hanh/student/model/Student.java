@@ -1,4 +1,4 @@
-package ss4_Oop.thuc_hanh.student;
+package ss4_Oop.thuc_hanh.student.model;
 
 import java.time.LocalDate;
 import java.util.SplittableRandom;

@@ -32,9 +32,7 @@ public class Main {
                         if(!ValidateInput.isVietnameseLettersAndSpaces(nameAdd)){
                             System.out.println("nhap sai dinh ten");
                         }
-                        if(ValidateInput.isCodeExists(nameAdd,)){
-                            System.out.println("ten da ton tai");
-                        }
+
                     }while (!ValidateInput.isVietnameseLettersAndSpaces(nameAdd));
 
                     do{

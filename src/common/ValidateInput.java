@@ -75,4 +75,7 @@ public class ValidateInput {
         }
         return value;
     }
+    public static boolean isString(String input) {
+        return input.matches("[A-Za-zÀ-ÿ\\s]+");  // Kiểm tra chỉ có chữ cái và khoảng trắng
+    }
 }

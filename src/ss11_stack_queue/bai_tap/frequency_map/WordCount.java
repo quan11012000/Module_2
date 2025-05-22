@@ -1,11 +1,5 @@
 package ss11_stack_queue.bai_tap.frequency_map;
-
-
 import common.StringMethod;
-import common.ValidateInput;
-
-import java.util.Map;
-import java.util.Scanner;
 import java.util.TreeMap;
 public class WordCount {
     public static void main(String[] args) {

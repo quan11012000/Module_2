@@ -1,4 +1,4 @@
-package ss14_insertion_sort;
+package ss14_insertion_sort.insertion_sort;
 
 public class InsertionSort {
 

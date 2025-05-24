@@ -1,6 +1,6 @@
 package ss14_insertion_sort.minhhoa;
 
-import ss14_insertion_sort.InsertionSort;
+import ss14_insertion_sort.insertion_sort.InsertionSort;
 
 import java.util.Scanner;
 

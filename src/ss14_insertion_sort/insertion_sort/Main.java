@@ -1,6 +1,7 @@
-package ss14_insertion_sort;
+package ss14_insertion_sort.insertion_sort;
 
 import common.ArrayCommonMethod;
+import ss14_insertion_sort.insertion_sort.InsertionSort;
 
 public class Main {
     public static void main(String[] args) {

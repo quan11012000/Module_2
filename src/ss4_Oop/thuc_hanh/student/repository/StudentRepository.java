@@ -59,10 +59,12 @@ public class StudentRepository implements IStudentRepository {
     @Override
     public List<Student> sortByNameThenId(boolean ascending) {
         List<Student> sortedList = new ArrayList<>(students);
-        if (ascending) {
+        if (ascending==true) {
             sortedList.sort(Comparator.comparing(Student::getName).thenComparing(Student::getId));
-        } else {
+        } else if(ascending==false) {
             sortedList.sort(Comparator.comparing(Student::getName).thenComparing(Student::getId).reversed());
+        }else{
+            System.out.println("khong tim thay lua chon");
         }
         return sortedList;
     }

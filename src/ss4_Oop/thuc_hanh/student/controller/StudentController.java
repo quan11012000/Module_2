@@ -35,7 +35,7 @@ public class StudentController {
                     studentView.showMessage("Đã xóa sinh viên có ID " + idToRemove);
                     break;
                 case 4:
-                    boolean ascending = studentView.selectSortType();
+                    Boolean ascending = studentView.selectSortType();
                     List<Student> sorted = studentService.sortByNameThenId(ascending);
                     studentView.displayStudents(sorted);
                     break;

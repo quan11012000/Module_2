@@ -5,6 +5,7 @@ import ss4_Oop.thuc_hanh.student.service.IStudentService;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -105,13 +106,28 @@ public class StudentView {
         System.out.println(message);
     }
 
-    public boolean selectSortType() {
+    public Boolean selectSortType() {
         System.out.println("1. Chọn sắp xếp tăng dần");
         System.out.println("2. Chọn sắp xếp giảm dần");
         Scanner sc = new Scanner(System.in);
-        int choice = sc.nextInt();
-        if(choice==1){
-            return true;
-        }else return false;
+        int choice;
+        while (true){
+            System.out.print("Lua chon cua ban: ");
+            try {
+                choice = Integer.parseInt(sc.nextLine());
+                if(choice==1){
+                    return true;
+                }else if(choice==2){
+                    return false;
+                }else {
+                    System.out.println("Ban phai nhap so trong menu");
+                }
+            }catch (NumberFormatException e){
+                System.out.println("Ban phai nhap so trong menu");
+            }
+
+        }
+
+
     }
 }

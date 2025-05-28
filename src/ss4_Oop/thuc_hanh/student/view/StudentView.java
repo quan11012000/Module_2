@@ -22,6 +22,7 @@ public class StudentView {
         System.out.println("2. Thêm sinh viên mới");
         System.out.println("3. Xóa sinh viên theo ID");
         System.out.println("4. Hiển thị danh sách sắp xếp (theo tên, trùng tên thì ID)");
+        System.out.println("5. Hiển thị danh sách tim kiem sinh vien (theo tên)");
         System.out.println("0. Thoát");
     }
 
@@ -82,7 +83,6 @@ public class StudentView {
         }
         return new Student(id, name, className);
     }
-
     public void displayStudents(List<Student> students) {
         if (students.isEmpty()) {
             System.out.println("Danh sách sinh viên trống.");
@@ -96,8 +96,22 @@ public class StudentView {
             System.out.println("-----------------------------");
         }
     }
-
+    public String seachStudentByName(){
+        Scanner sc = new Scanner(System.in);
+        String str = sc.nextLine();
+        return str;
+    }
     public void showMessage(String message) {
         System.out.println(message);
+    }
+
+    public boolean selectSortType() {
+        System.out.println("1. Chọn sắp xếp tăng dần");
+        System.out.println("2. Chọn sắp xếp giảm dần");
+        Scanner sc = new Scanner(System.in);
+        int choice = sc.nextInt();
+        if(choice==1){
+            return true;
+        }else return false;
     }
 }

@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface IStudentRepository extends IRepository<Student>{
     List<Student> sortByNameThenId(boolean ascending);
+    List<Student> seachByName(String name);
 }

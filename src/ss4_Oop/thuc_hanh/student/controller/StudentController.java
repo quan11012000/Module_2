@@ -35,8 +35,19 @@ public class StudentController {
                     studentView.showMessage("Đã xóa sinh viên có ID " + idToRemove);
                     break;
                 case 4:
-                    List<Student> sorted = studentService.sortByNameThenId();
+                    boolean ascending = studentView.selectSortType();
+                    List<Student> sorted = studentService.sortByNameThenId(ascending);
                     studentView.displayStudents(sorted);
+                    break;
+                case 5:
+                    String keyword= studentView.seachStudentByName();
+                    List<Student> seachList = studentService.seachByName(keyword);
+                    if(!seachList.isEmpty()){
+                        studentView.showMessage("Danh sách tìm kiếm theo tên "+ keyword);
+                        studentView.displayStudents(seachList);
+                    }else{
+                        studentView.showMessage("Khong tim thay sinh vien nao ten co chua "+keyword);
+                    }
                     break;
                 case 0:
                     studentView.showMessage("Thoát chương trình.");

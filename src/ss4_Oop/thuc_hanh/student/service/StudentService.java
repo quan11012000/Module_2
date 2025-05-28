@@ -40,7 +40,11 @@ public class StudentService implements IStudentService {
     }
 
     @Override
-    public List<Student> sortByNameThenId() {
-        return iRepository.sortByNameThenId(false);
+    public List<Student> sortByNameThenId(boolean ascending) {
+        return iRepository.sortByNameThenId(ascending);
+    }
+    @Override
+    public List<Student> seachByName(String name) {
+        return iRepository.seachByName(name);
     }
 }

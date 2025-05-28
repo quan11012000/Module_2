@@ -5,5 +5,6 @@ import ss4_Oop.thuc_hanh.student.model.Student;
 import java.util.List;
 
 public interface IStudentService extends IService<Student> {
-    List<Student> sortByNameThenId();
+    List<Student> sortByNameThenId(boolean ascending);
+    List<Student> seachByName(String name);
 }

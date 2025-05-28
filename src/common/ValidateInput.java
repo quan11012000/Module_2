@@ -55,7 +55,7 @@ public class ValidateInput {
     }
     public static boolean isValidPhoneNumber(String phone) {
         // Định dạng số điện thoại Việt Nam: bắt đầu với 0, sau đó là 9 số.
-        return phone.matches("^0(3|5|7|8|9)[0-9]{8}$");
+        return phone.matches("^^\\d{2}-0\\d{9}$");
     }
     public static double inputDouble(Scanner scanner, String message) {
         double value;

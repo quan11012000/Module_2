@@ -1,3 +1,5 @@
+package ss99;
+
 import common.ArrayCommonMethod;
 
 import java.util.*;

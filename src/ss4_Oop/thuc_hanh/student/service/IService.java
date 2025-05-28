@@ -1,8 +1,11 @@
 package ss4_Oop.thuc_hanh.student.service;
 
-public interface IService {
-    public boolean add(Person person);
-    public boolean edit(Person person);
-    public boolean delete(int code);
-    public void display();
+import java.util.List;
+
+public interface IService<T> {
+    List<T> findAll();
+    void add(T t);
+    void remove(int id);
+    T findById(int id);
+    boolean isIdExist(int id);
 }

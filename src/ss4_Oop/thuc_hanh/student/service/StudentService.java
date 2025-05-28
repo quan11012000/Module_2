@@ -1,29 +1,46 @@
 package ss4_Oop.thuc_hanh.student.service;
 
-public class StudentService {
-    private final StudentRepository repository = new StudentRepository();
+import ss12_java_collection_framework.mvc.service.IProductService;
+import ss4_Oop.thuc_hanh.student.model.Student;
+import ss4_Oop.thuc_hanh.student.repository.IRepository;
+import ss4_Oop.thuc_hanh.student.repository.IStudentRepository;
+import ss4_Oop.thuc_hanh.student.repository.StudentRepository;
 
-    public List<Student> getAllStudents() {
-        return repository.findAll();
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class StudentService implements IStudentService {
+    IStudentRepository iRepository = new StudentRepository();
+
+    @Override
+    public List<Student> findAll() {
+        return iRepository.findAll();
     }
 
-    public void addStudent(Student student) {
-        repository.save(student);
+    @Override
+    public void add(Student student) {
+        iRepository.add(student);
     }
 
-    public Student getStudentById(int id) {
-        return repository.findById(id);
+    @Override
+    public void remove(int id) {
+        iRepository.remove(id);
     }
 
-    public void deleteStudentById(int id) {
-        repository.deleteById(id);
+    @Override
+    public Student findById(int id) {
+        return iRepository.findById(id);
     }
 
-    public List<Student> getStudentsSortedByNameAndId() {
-        return repository.findAll()
-                .stream()
-                .sorted(Comparator.comparing(Student::getName)
-                        .thenComparing(Student::getId))
-                .collect(Collectors.toList());
+    @Override
+    public boolean isIdExist(int id) {
+        return findById(id) != null;
+    }
+
+    @Override
+    public List<Student> sortByNameThenId() {
+        return iRepository.sortByNameThenId(false);
     }
 }

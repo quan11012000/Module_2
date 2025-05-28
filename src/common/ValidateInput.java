@@ -1,4 +1,6 @@
 package common;
+import ss4_Oop.thuc_hanh.student.model.Student;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -48,9 +50,6 @@ public class ValidateInput {
         } catch (DateTimeParseException e) {
             return false;
         }
-    }
-    public static boolean isCodeExists(String code, List<Student> students) {
-        return students.stream().anyMatch(s -> String.valueOf(s.getCode()).equals(code));
     }
     public static boolean isValidPhoneNumber(String phone) {
         // Định dạng số điện thoại Việt Nam: bắt đầu với 0, sau đó là 9 số.

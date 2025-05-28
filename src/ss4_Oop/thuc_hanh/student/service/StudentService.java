@@ -1,30 +1,29 @@
 package ss4_Oop.thuc_hanh.student.service;
 
-import ss4_Oop.thuc_hanh.student.model.Person;
+public class StudentService {
+    private final StudentRepository repository = new StudentRepository();
 
-public class StudentService implements IStudenService {
-    @Override
-    public boolean add(Person person) {
-        return false;
+    public List<Student> getAllStudents() {
+        return repository.findAll();
     }
 
-    @Override
-    public boolean edit(Person person) {
-        return false;
+    public void addStudent(Student student) {
+        repository.save(student);
     }
 
-    @Override
-    public boolean delete(int code) {
-        return false;
+    public Student getStudentById(int id) {
+        return repository.findById(id);
     }
 
-    @Override
-    public void display() {
-
+    public void deleteStudentById(int id) {
+        repository.deleteById(id);
     }
 
-    @Override
-    public void study() {
-
+    public List<Student> getStudentsSortedByNameAndId() {
+        return repository.findAll()
+                .stream()
+                .sorted(Comparator.comparing(Student::getName)
+                        .thenComparing(Student::getId))
+                .collect(Collectors.toList());
     }
 }

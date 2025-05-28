@@ -5,7 +5,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import common.ValidateInput;
-import ss4_Oop.thuc_hanh.student.model.Student;
 
 import java.util.Scanner;
 

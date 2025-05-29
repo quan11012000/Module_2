@@ -23,14 +23,12 @@ public class Main {
             }
         }
     }
-
-    private static List<String> parseCsvLine(String line) {
+    public static List<String> parseCsvLine(String csvLine) {
         List<String> result = new ArrayList<>();
-        if (line != null && !line.isEmpty()) {
-            // Tách theo tab (\t)
-            String[] splitData = line.split("\\t");
-            for (String item : splitData) {
-                result.add(item.replaceAll("\"", "").trim());
+        if (csvLine != null) {
+            String[] splitData = csvLine.split("\\t");
+            for (int i = 0; i < splitData.length; i++) {
+                result.add(splitData[i]);
             }
         }
         return result;

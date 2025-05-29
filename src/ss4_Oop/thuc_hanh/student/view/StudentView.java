@@ -1,14 +1,8 @@
 package ss4_Oop.thuc_hanh.student.view;
-
 import ss4_Oop.thuc_hanh.student.model.Student;
 import ss4_Oop.thuc_hanh.student.service.IStudentService;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
-
 public class StudentView {
     private final Scanner scanner = new Scanner(System.in);
     private final IStudentService studentService;

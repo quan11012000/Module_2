@@ -29,7 +29,7 @@ public class FileCopy {
             System.err.println(" Lỗi khi đọc hoặc ghi file: " + e.getMessage());
         }
     }
-    private static int countPreviousCopies(File file) {
+    public static int countPreviousCopies(File file) {
         int count = 0;
         if (!file.exists()) return 0;
 

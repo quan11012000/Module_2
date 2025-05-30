@@ -7,10 +7,10 @@ import ss17_banary_file.bai_tap.product_management.repository.ProductRepository;
 
 import java.util.List;
 
-public class ServiceProduct implements IProductService{
+public class ProductService implements IProductService{
     IProductRepository iRepository = new ProductRepository();
     @Override
-    public List<Product> seachByName(String name) {
+    public List<Product> seachByName(String name) throws ClassNotFoundException {
         return iRepository.seachByName(name);
     }
     @Override
@@ -26,12 +26,14 @@ public class ServiceProduct implements IProductService{
         return null;
     }
 
+
+
     @Override
-    public Product finByCode(int code) throws ClassNotFoundException {
-        return iRepository.finByCode(code);
+    public Product findByCode(String code) throws ClassNotFoundException {
+        return iRepository.findByCode(code);
     }
 }
 
 
 
-}
+

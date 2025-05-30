@@ -19,16 +19,15 @@ public class ProductRepository implements IProductRepository{
     }
 
     @Override
-    public List<Product> getAll()  {
+    public List<Product> getAll() throws ClassNotFoundException {
         File file = new File(FILE_PATH);
         if(!file.exists()) return new ArrayList<>();
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))){
             return (List<Product>) ois.readObject();
 
         }catch (IOException e){
+            System.err.println("Lỗi đọc file: " + e.getMessage());
             return new ArrayList<>();
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
         }
     }
 
@@ -37,10 +36,13 @@ public class ProductRepository implements IProductRepository{
         return null;
     }
 
+
     @Override
-    public Product finByCode(int code)  {
-        for(Product p:getAll()){
-            if(p.getCode()==(code)) return p;
+    public Product findByCode(String code) throws ClassNotFoundException {
+        for(Product p : getAll()) {
+            if(p.getCode() != null && p.getCode().equals(code)) {
+                return p;
+            }
         }
         return null;
     }
@@ -52,7 +54,7 @@ public class ProductRepository implements IProductRepository{
         }
     }
     @Override
-    public List<Product> seachByName(String name) {
+    public List<Product> seachByName(String name) throws ClassNotFoundException {
         List<Product> seachList = new ArrayList<>();
         for (Product p : getAll()){
             if(p.getName().contains(name)){

@@ -5,6 +5,8 @@ import ss17_banary_file.bai_tap.product_management.modle.Product;
 import java.util.List;
 
 public interface IProductRepository extends Irepository<Product>{
-    List<Product> seachByName(String name);
+    Product findByCode(String code) throws ClassNotFoundException;
+
+    List<Product> seachByName(String name) throws ClassNotFoundException;
 
 }

@@ -1,16 +1,18 @@
 package ss17_banary_file.bai_tap.product_management.modle;
 
-public class Product {
-    private int code;
+import java.io.Serializable;
+
+public class Product implements Serializable {
+    private String code;
     private String name;
-    private float price;
+    private double price;
     private String item;
     private String description;
     public Product(){
 
     }
 
-    public Product(int code, String name, float price, String item, String description) {
+    public Product(String code, String name, double price, String item, String description) {
         this.code = code;
         this.name = name;
         this.price = price;
@@ -18,11 +20,11 @@ public class Product {
         this.description = description;
     }
 
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(String code) {
         this.code = code;
     }
 
@@ -34,11 +36,11 @@ public class Product {
         this.name = name;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

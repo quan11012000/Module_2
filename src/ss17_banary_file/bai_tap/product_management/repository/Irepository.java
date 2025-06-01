@@ -7,4 +7,5 @@ public interface Irepository<T> {
     List<T> getAll() throws ClassNotFoundException;
     List<T> displayProducts();
     T findByCode(String code) throws ClassNotFoundException;
+
 }

@@ -25,26 +25,89 @@ public class ProductView {
         }
     }
 
-    public Product inputProduct() {
-        System.out.print("Nhập mã sản phẩm: ");
-        String code = scanner.nextLine();
+    public Product inputProduct(List<String> existingCodes) {
+        String code;
+        while (true) {
+            System.out.print("Nhập mã sản phẩm (số nguyên, không trống, không trùng): ");
+            code = scanner.nextLine().trim();
 
-        System.out.print("Nhập tên sản phẩm: ");
-        String name = scanner.nextLine();
-
-        System.out.print("Nhập giá sản phẩm: ");
-        double price;
-        try {
-            price = Double.parseDouble(scanner.nextLine());
-        } catch (Exception e) {
-            price = -1;
+            if (code.isEmpty()) {
+                System.out.println("Mã sản phẩm không được để trống, vui lòng nhập lại.");
+                continue;
+            }
+            try {
+                Integer.parseInt(code);
+            } catch (NumberFormatException e) {
+                System.out.println("Mã sản phẩm phải là số nguyên, vui lòng nhập lại.");
+                continue;
+            }
+            if (existingCodes.contains(code)) {
+                System.out.println("Mã sản phẩm đã tồn tại, vui lòng nhập mã khác.");
+                continue;
+            }
+            break;
         }
 
-        System.out.print("Nhập hãng sản xuất: ");
-        String item = scanner.nextLine();
+        String name;
+        while (true) {
+            System.out.print("Nhập tên sản phẩm (chỉ chữ và khoảng trắng, không trống): ");
+            name = scanner.nextLine().trim();
+            if (name.isEmpty()) {
+                System.out.println("Tên sản phẩm không được để trống, vui lòng nhập lại.");
+                continue;
+            }
+            if (!name.matches("[a-zA-Z\\s]+")) {
+                System.out.println("Tên sản phẩm chỉ được chứa chữ cái và khoảng trắng, vui lòng nhập lại.");
+                continue;
+            }
+            break;
+        }
 
-        System.out.print("Nhập mô tả sản phẩm: ");
-        String description = scanner.nextLine();
+        double price;
+        while (true) {
+            System.out.print("Nhập giá sản phẩm (số thực >= 0): ");
+            String input = scanner.nextLine();
+            try {
+                price = Double.parseDouble(input);
+                if (price < 0) {
+                    System.out.println("Giá phải lớn hơn hoặc bằng 0, vui lòng nhập lại.");
+                    continue;
+                }
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Giá không hợp lệ, vui lòng nhập số.");
+            }
+        }
+
+        String item;
+        while (true) {
+            System.out.print("Nhập hãng sản xuất (chỉ chữ và khoảng trắng, không trống): ");
+            item = scanner.nextLine().trim();
+            if (item.isEmpty()) {
+                System.out.println("Hãng sản xuất không được để trống, vui lòng nhập lại.");
+                continue;
+            }
+            if (!item.matches("[a-zA-Z\\s]+")) {
+                System.out.println("Hãng sản xuất chỉ được chứa chữ cái và khoảng trắng, vui lòng nhập lại.");
+                continue;
+            }
+            break;
+        }
+
+        String description;
+        while (true) {
+            System.out.print("Nhập mô tả sản phẩm (chỉ chữ và khoảng trắng, không trống): ");
+            description = scanner.nextLine().trim();
+            if (description.isEmpty()) {
+                System.out.println("Mô tả không được để trống, vui lòng nhập lại.");
+                continue;
+            }
+            if (description.length() < 5 || description.length() > 500) {
+                System.out.println("Mô tả phải từ 5 đến 500 ký tự, vui lòng nhập lại.");
+                continue;
+            }
+            break;
+        }
 
         return new Product(code, name, price, item, description);
     }

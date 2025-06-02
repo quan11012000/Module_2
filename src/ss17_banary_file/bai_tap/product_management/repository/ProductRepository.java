@@ -62,7 +62,8 @@ public class ProductRepository implements IProductRepository {
 
     @Override
     public Product findByCode(String code) throws ClassNotFoundException {
-        for (Product p : getAll()) {
+        List<Product> products = getAll();
+        for (Product p : products ) {
             if (p.getCode() != null && p.getCode().equals(code)) {
                 return p;
             }
@@ -73,7 +74,8 @@ public class ProductRepository implements IProductRepository {
     @Override
     public List<Product> seachByName(String name) throws ClassNotFoundException {
         List<Product> searchList = new ArrayList<>();
-        for (Product p : getAll()) {
+        List<Product> products = getAll();
+        for (Product p : products) {
             if (p.getName() != null && p.getName().toLowerCase().contains(name.toLowerCase())) {
                 searchList.add(p);
             }

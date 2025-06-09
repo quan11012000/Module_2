@@ -70,7 +70,7 @@ public class ManagementController {
 
             switch (vehicleType) {
                 case 1: // Ô tô
-                    newVehicle = viewCar.getCarInput();
+                    newVehicle = viewCar.getCarInput(getAllVehicle());
                     if (newVehicle != null) {
                         carService.add((Car) newVehicle);
                         viewCar.showCarAdded();
@@ -78,7 +78,7 @@ public class ManagementController {
                     break;
 
                 case 2: // Xe tải
-                    newVehicle = viewTruck.getTruckInput();
+                    newVehicle = viewTruck.getTruckInput(getAllVehicle());
                     if (newVehicle != null) {
                         truckService.add((Truck) newVehicle);
                         viewTruck.showTruckAdded();
@@ -86,7 +86,7 @@ public class ManagementController {
                     break;
 
                 case 3: // Xe máy
-                    newVehicle = viewMotorbike.getMotorbikeInput();
+                    newVehicle = viewMotorbike.getMotorbikeInput(getAllVehicle());
                     if (newVehicle != null) {
                         motorbikeService.add((Motorbike) newVehicle);
                         viewMotorbike.showMotorbikeAdded();
@@ -122,17 +122,16 @@ public class ManagementController {
             }
 
             mainView.showVehicleToEdit(vehicleToEdit);
-            int attributeChoice = mainView.showEditAttributeMenuAndGetChoice();
 
-            if (attributeChoice == 8) return; // Quay lại
+
 
             // Gọi view tương ứng để sửa
             if (vehicleToEdit instanceof Car) {
-                viewCar.editCarAttribute((Car) vehicleToEdit, attributeChoice);
+                viewCar.editCarAllAttributes((Car) vehicleToEdit);
             } else if (vehicleToEdit instanceof Truck) {
-                viewTruck.editTruckAttribute((Truck) vehicleToEdit, attributeChoice);
+                viewTruck.editTruckAllAttributes((Truck) vehicleToEdit);
             } else if (vehicleToEdit instanceof Motorbike) {
-                viewMotorbike.editMotorbikeAttribute((Motorbike) vehicleToEdit, attributeChoice);
+                viewMotorbike.editMotorbikeAllAttributes((Motorbike) vehicleToEdit);
             }
         }
 
@@ -140,42 +139,66 @@ public class ManagementController {
             mainView.showAllVehicles(vehicles);
         }
 
-        private void removeVehicle() {
-            ArrayList<Vehicle> vehicles = getAllVehicle();
-            if (vehicles.isEmpty()) {
-                mainView.showErrorMessage("Danh sách xe trống!");
-                return;
-            }
-            String licensePlate = mainView.getInputWithPrompt("Nhập biển số xe cần xóa: ");
-            if(carService.delete(licensePlate) || truckService.delete(licensePlate) || motorbikeService.delete(licensePlate)){
-                System.out.println("đã xoá thành công");
-            }else{
-                System.out.println("không tìm thấy biển số xe tương ứng");
-            }
+    private void removeVehicle() {
+        ArrayList<Vehicle> vehicles = getAllVehicle();
+        if (vehicles.isEmpty()) {
+            mainView.showErrorMessage("Danh sách xe trống!");
+            return;
         }
 
-        private void searchVehicle() {
-            ArrayList<Vehicle> vehicles = getAllVehicle();
-            if (vehicles.isEmpty()) {
-                mainView.showErrorMessage("Danh sách xe trống!");
-                return;
-            }
+        String licensePlate = mainView.getInputWithPrompt("Nhập biển số xe cần xóa: ");
 
-            String licensePlate = mainView.getInputWithPrompt("Nhập biển số xe cần tìm: ");
+        Vehicle found = vehicles.stream()
+                .filter(v -> v.getVehicleLicensePlate().equalsIgnoreCase(licensePlate))
+                .findFirst()
+                .orElse(null);
 
-            Vehicle found = vehicles.stream()
-                    .filter(v -> v.getVehicleLicensePlate().equalsIgnoreCase(licensePlate))
-                    .findFirst()
-                    .orElse(null);
+        if (found == null) {
+            System.out.println("❌ Không tìm thấy biển số xe tương ứng.");
+            return;
+        }
 
-            if (found != null) {
-                mainView.showSuccessMessage("Tìm thấy xe:");
-                System.out.println(found.getInfo());
+        System.out.println("🚗 Tìm thấy xe: " + found.getInfo());
+        String confirm = mainView.getInputWithPrompt("⚠️ Bạn có chắc chắn muốn xóa xe này? (1 = Có / 2 = Không): ");
+
+        if (confirm.equals("1")) {
+            boolean isDeleted = carService.delete(licensePlate)
+                    || truckService.delete(licensePlate)
+                    || motorbikeService.delete(licensePlate);
+
+            if (isDeleted) {
+                System.out.println("✅ Đã xóa xe thành công!");
             } else {
-                mainView.showErrorMessage("Không tìm thấy xe với biển số: " + licensePlate);
+                System.out.println("❌ Xóa thất bại!");
             }
+        } else {
+            System.out.println("❌ Hủy thao tác xóa xe.");
         }
-        private ArrayList<Vehicle> getAllVehicle(){
+    }
+
+
+    private void searchVehicle() {
+        ArrayList<Vehicle> vehicles = getAllVehicle();
+        if (vehicles.isEmpty()) {
+            mainView.showErrorMessage("Danh sách xe trống!");
+            return;
+        }
+
+        String keyword = mainView.getInputWithPrompt("Nhập biển số hoặc từ khóa cần tìm: ").toLowerCase();
+
+        List<Vehicle> matchedVehicles = vehicles.stream()
+                .filter(v -> v.getVehicleLicensePlate().toLowerCase().contains(keyword))
+                .toList();
+
+        if (!matchedVehicles.isEmpty()) {
+            mainView.showSuccessMessage("🔍 Tìm thấy " + matchedVehicles.size() + " xe phù hợp:");
+            matchedVehicles.forEach(v -> System.out.println(v.getInfo()));
+        } else {
+            mainView.showErrorMessage("❌ Không tìm thấy xe nào phù hợp với từ khóa: " + keyword);
+        }
+    }
+
+    private ArrayList<Vehicle> getAllVehicle(){
             ArrayList<Vehicle> vehicles = new ArrayList<>();
             List<Car> cars = carService.findAll();
             vehicles.addAll(cars);

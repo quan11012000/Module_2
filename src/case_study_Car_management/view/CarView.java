@@ -1,156 +1,58 @@
 package case_study_Car_management.view;
+
 import case_study_Car_management.module.Car;
 import case_study_Car_management.module.Vehicle;
 
 import java.util.List;
 import java.util.Scanner;
-public class CarView {
-    private Scanner scanner;
 
+public class CarView {
+    private final Scanner scanner;
+    private final InputHelper inputHelper;
 
     public CarView() {
         scanner = new Scanner(System.in);
+        inputHelper = new InputHelper(scanner);
     }
 
-    public Car getCarInput() {
+    public Car getCarInput(List<Vehicle> existingVehicles) {
         showHeader();
 
-        String vehicleName = getValidInput("Tên xe: ");
-        String vehicleColor = getValidInput("Màu xe: ");
-        double vehiclePrice = getValidPrice("Giá xe (VND): ");
-        String vehicleLicensePlate = getValidInput("Biển số xe: ");
-        String vehicleManufacturer = getValidInput("Hãng sản xuất: ");
-        String vehicleYearManufacturer = getValidInput("Năm sản xuất: ");
-        String vehicleDescription = getValidInput("Mô tả xe: ");
+        String name = inputHelper.promptValidatedString("Tên xe: ");
+        String color = inputHelper.promptValidatedString("Màu xe: ");
+        double price = inputHelper.promptDouble("Giá xe (VND): ");
+        String licensePlate = inputHelper.inputLicensePlateWithValidation("ô tô", existingVehicles);
+        String manufacturer = inputHelper.promptValidatedString("Hãng sản xuất: ");
+        String year = inputHelper.promptYear("Năm sản xuất: ");
+        String description = inputHelper.promptDescription("Mô tả xe: ");
 
-        // Thêm thuộc tính riêng của Car nếu có
-        return new Car(vehicleName, vehicleColor, vehiclePrice, vehicleLicensePlate,
-                vehicleManufacturer, vehicleYearManufacturer, vehicleDescription);
+        return new Car(name, color, price, licensePlate, manufacturer, year, description);
     }
 
-    public void editCarAttribute(Car car, int attributeChoice) {
-        System.out.println("\n🔧 SỬA THÔNG TIN Ô TÔ");
+    public void editCarAllAttributes(Car car) {
+        System.out.println("\n🔧 CẬP NHẬT TOÀN BỘ THÔNG TIN Ô TÔ (ENTER để giữ nguyên)");
 
-        switch (attributeChoice) {
-            case 1: // Tên xe
-                String newName = getValidInput("Tên xe mới: ");
-                car.setVehicleName(newName);
-                System.out.println("✅ Đã cập nhật tên xe!");
-                break;
+        String newName = inputHelper.promptWithDefault("Tên xe mới (hiện tại: " + car.getVehicleName() + "): ", car.getVehicleName(), true, 5, 100);
+        String newColor = inputHelper.promptWithDefault("Màu xe mới (hiện tại: " + car.getVehicleColor() + "): ", car.getVehicleColor(), true, 3, 100);
+        double newPrice = inputHelper.promptDoubleWithDefault("Giá xe mới (hiện tại: " + car.getVehiclePrice() + "): ", car.getVehiclePrice());
+        String newManufacturer = inputHelper.promptWithDefault("Hãng sản xuất mới (hiện tại: " + car.getVehicleManufacturer() + "): ", car.getVehicleManufacturer(), true, 3, 100);
+        String newYear = inputHelper.promptYearWithDefault("Năm sản xuất mới (hiện tại: " + car.getVehicleYearManufacturer() + "): ", car.getVehicleYearManufacturer());
+        String newDescription = inputHelper.promptWithDefault("Mô tả mới: ", car.getVehicleDescription(), false, 0, 500);
 
-            case 2: // Màu xe
-                String newColor = getValidInput("Màu xe mới: ");
-                car.setVehicleColor(newColor);
-                System.out.println("✅ Đã cập nhật màu xe!");
-                break;
+        car.setVehicleName(newName);
+        car.setVehicleColor(newColor);
+        car.setVehiclePrice(newPrice);
+        car.setVehicleManufacturer(newManufacturer);
+        car.setVehicleYearManufacturer(newYear);
+        car.setVehicleDescription(newDescription);
 
-            case 3: // Giá xe
-                double newPrice = getValidPrice("Giá xe mới (VND): ");
-                car.setVehiclePrice(newPrice);
-                System.out.println("✅ Đã cập nhật giá xe!");
-                break;
-
-            case 4: // Biển số
-                String newLicensePlate = getValidInput("Biển số mới: ");
-                car.setVehicleLicensePlate(newLicensePlate);
-                System.out.println("✅ Đã cập nhật biển số xe!");
-                break;
-
-            case 5: // Hãng sản xuất
-                String newManufacturer = getValidInput("Hãng sản xuất mới: ");
-                car.setVehicleManufacturer(newManufacturer);
-                System.out.println("✅ Đã cập nhật hãng sản xuất!");
-                break;
-
-            case 6: // Năm sản xuất
-                String newYear = getValidInput("Năm sản xuất mới: ");
-                car.setVehicleYearManufacturer(newYear);
-                System.out.println("✅ Đã cập nhật năm sản xuất!");
-                break;
-
-            case 7: // Mô tả
-                String newDescription = getValidInput("Mô tả mới: ");
-                car.setVehicleDescription(newDescription);
-                System.out.println("✅ Đã cập nhật mô tả xe!");
-                break;
-
-            default:
-                System.out.println("❌ Lựa chọn không hợp lệ!");
-        }
+        System.out.println("✅ Đã cập nhật toàn bộ thông tin ô tô.");
     }
 
     private void showHeader() {
         System.out.println("\n" + "=".repeat(50));
-        System.out.println("🚗           NHẬP THÔNG TIN Ô TÔ");
+        System.out.println("🚗          NHẬP THÔNG TIN Ô TÔ");
         System.out.println("=".repeat(50));
-    }
-
-    private String getValidInput(String prompt) {
-        String input;
-        do {
-            System.out.print("📝 " + prompt);
-            input = scanner.nextLine().trim();
-            if (input.isEmpty()) {
-                System.out.println("❌ Vui lòng nhập thông tin!");
-            }
-        } while (input.isEmpty());
-        return input;
-    }
-
-    private double getValidPrice(String prompt) {
-        double price;
-        do {
-            try {
-                System.out.print("💰 " + prompt);
-                price = Double.parseDouble(scanner.nextLine());
-                if (price <= 0) {
-                    System.out.println("❌ Giá xe phải lớn hơn 0!");
-                    price = -1;
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("❌ Vui lòng nhập số hợp lệ!");
-                price = -1;
-            }
-        } while (price == -1);
-        return price;
-    }
-    public boolean isDuplicateLicensePlate(String licensePlate, String vehicleType,List<Vehicle> vehicles) {
-        for (Vehicle vehicle : vehicles) {
-            if (vehicle.getVehicleLicensePlate().equalsIgnoreCase(licensePlate) &&
-                    vehicle.getVehicleType().equalsIgnoreCase(vehicleType)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean isValidLicensePlateFormat(String licensePlate) {
-        // Regex cho biển số VN: 2 số + 1 chữ + 5 số (ví dụ: 30A-12345)
-        String regex = "^\\d{2}[A-Z]\\d-\\d{5}$";;
-        return licensePlate.matches(regex);
-    }
-
-    public String inputLicensePlateWithValidation(String vehicleType) {
-        String licensePlate;
-
-        while (true) {
-            System.out.print("Nhập biển số xe " + vehicleType + " (định dạng: 30A1-12345): ");
-            licensePlate = scanner.nextLine().trim().toUpperCase();
-
-            // Kiểm tra định dạng
-            if (!isValidLicensePlateFormat(licensePlate)) {
-                System.out.println("❌ Định dạng biển số không hợp lệ! Vui lòng nhập theo định dạng: 30A-12345");
-                continue;
-            }
-
-            // Kiểm tra trùng lặp
-
-            // Nếu không trùng và đúng định dạng
-            System.out.println("✅ Biển số " + licensePlate + " hợp lệ!");
-            break;
-        }
-
-        return licensePlate;
     }
 
     public void showCarAdded() {

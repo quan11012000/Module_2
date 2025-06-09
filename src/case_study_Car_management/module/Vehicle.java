@@ -83,7 +83,7 @@ public abstract class Vehicle {
         this.vehicleDescription = vehicleDescription;
     }
     public String toCsvLine(){
-        return String.join(",",getVehicleType(), vehicleName, vehicleColor,String.format("%.0f",vehiclePrice) ,
+        return String.join(",", vehicleName, vehicleColor,String.format("%.0f",vehiclePrice) ,
                 vehicleLicensePlate, vehicleManufacturer, vehicleYearManufacturer, vehicleDescription);
     }
 }

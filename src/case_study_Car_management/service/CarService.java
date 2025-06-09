@@ -23,9 +23,9 @@ public class CarService implements ICarService{
     }
 
     @Override
-    public boolean delete(String vehicleName, String LicensePlate) {
+    public boolean delete( String LicensePlate) {
         try{
-            iCarRepository.delete(vehicleName,LicensePlate);
+            iCarRepository.delete(LicensePlate);
             return true;
         }catch (VehicleNotFoundException e){
             return false;

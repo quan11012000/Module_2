@@ -1,9 +1,12 @@
 package case_study_Car_management.view;
 import case_study_Car_management.module.Car;
+import case_study_Car_management.module.Vehicle;
 
+import java.util.List;
 import java.util.Scanner;
 public class CarView {
     private Scanner scanner;
+
 
     public CarView() {
         scanner = new Scanner(System.in);
@@ -110,6 +113,44 @@ public class CarView {
             }
         } while (price == -1);
         return price;
+    }
+    public boolean isDuplicateLicensePlate(String licensePlate, String vehicleType,List<Vehicle> vehicles) {
+        for (Vehicle vehicle : vehicles) {
+            if (vehicle.getVehicleLicensePlate().equalsIgnoreCase(licensePlate) &&
+                    vehicle.getVehicleType().equalsIgnoreCase(vehicleType)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isValidLicensePlateFormat(String licensePlate) {
+        // Regex cho biển số VN: 2 số + 1 chữ + 5 số (ví dụ: 30A-12345)
+        String regex = "^\\d{2}[A-Z]\\d-\\d{5}$";;
+        return licensePlate.matches(regex);
+    }
+
+    public String inputLicensePlateWithValidation(String vehicleType) {
+        String licensePlate;
+
+        while (true) {
+            System.out.print("Nhập biển số xe " + vehicleType + " (định dạng: 30A1-12345): ");
+            licensePlate = scanner.nextLine().trim().toUpperCase();
+
+            // Kiểm tra định dạng
+            if (!isValidLicensePlateFormat(licensePlate)) {
+                System.out.println("❌ Định dạng biển số không hợp lệ! Vui lòng nhập theo định dạng: 30A-12345");
+                continue;
+            }
+
+            // Kiểm tra trùng lặp
+
+            // Nếu không trùng và đúng định dạng
+            System.out.println("✅ Biển số " + licensePlate + " hợp lệ!");
+            break;
+        }
+
+        return licensePlate;
     }
 
     public void showCarAdded() {

@@ -22,9 +22,9 @@ public class MotorbikeService implements IMotorbikeService{
     }
 
     @Override
-    public boolean delete(String vehicleName, String LicensePlate) {
+    public boolean delete( String LicensePlate) {
         try{
-            iMotorbikeRepository.delete(vehicleName,LicensePlate);
+            iMotorbikeRepository.delete(LicensePlate);
             return true;
         }catch (VehicleNotFoundException e){
             return false;

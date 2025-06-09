@@ -25,10 +25,9 @@ public class TruckRepository implements ITruckRepository {
         writeToFile(PATH,trucks);
     }
     @Override
-    public void delete(String truckName, String truckLicensePlate) throws VehicleNotFoundException {
+    public void delete( String truckLicensePlate) throws VehicleNotFoundException {
         for(int i = 0 ; i < trucks.size();i++){
-            if(trucks.get(i).getVehicleName().equals(truckName)
-                    && trucks.get(i).getVehicleLicensePlate().equals(truckLicensePlate)){
+            if(trucks.get(i).getVehicleLicensePlate().equals(truckLicensePlate)){
                 trucks.remove(i);
                 return;
             }

@@ -18,7 +18,7 @@ public class ManagementController {
     private ICarService carService = new CarService();
     private ITruckService truckService = new TruckService();
     private IMotorbikeService  motorbikeService = new MotorbikeService();
-    ArrayList<Vehicle> vehicles = new ArrayList<>();
+
     private View mainView;
     private CarView viewCar;
     private TruckView viewTruck;
@@ -42,12 +42,7 @@ public class ManagementController {
                         addVehicle();
                         break;
                     case 2:
-                        List<Car> cars = carService.findAll();
-                        vehicles.addAll(cars);
-                        List<Truck> trucks = truckService.findAll();
-                        vehicles.addAll(trucks);
-                        List<Motorbike> motorbikes = motorbikeService.findAll();
-                        vehicles.addAll(motorbikes);
+                        ArrayList<Vehicle> vehicles = getAllVehicle();
                         displayAllVehicles(vehicles);
                         break;
                     case 3:
@@ -108,7 +103,7 @@ public class ManagementController {
 
         // ← THÊM MỚI: Chức năng sửa xe
         private void editVehicle() {
-
+            ArrayList<Vehicle> vehicles = getAllVehicle();
             if (vehicles.isEmpty()) {
                 mainView.showErrorMessage("Danh sách xe trống!");
                 return;
@@ -146,23 +141,21 @@ public class ManagementController {
         }
 
         private void removeVehicle() {
+            ArrayList<Vehicle> vehicles = getAllVehicle();
             if (vehicles.isEmpty()) {
                 mainView.showErrorMessage("Danh sách xe trống!");
                 return;
             }
-
             String licensePlate = mainView.getInputWithPrompt("Nhập biển số xe cần xóa: ");
-
-            boolean removed = vehicles.removeIf(v -> v.getVehicleLicensePlate().equalsIgnoreCase(licensePlate));
-
-            if (removed) {
-                mainView.showSuccessMessage("Xóa xe thành công!");
-            } else {
-                mainView.showErrorMessage("Không tìm thấy xe với biển số: " + licensePlate);
+            if(carService.delete(licensePlate) || truckService.delete(licensePlate) || motorbikeService.delete(licensePlate)){
+                System.out.println("đã xoá thành công");
+            }else{
+                System.out.println("không tìm thấy biển số xe tương ứng");
             }
         }
 
         private void searchVehicle() {
+            ArrayList<Vehicle> vehicles = getAllVehicle();
             if (vehicles.isEmpty()) {
                 mainView.showErrorMessage("Danh sách xe trống!");
                 return;
@@ -181,6 +174,16 @@ public class ManagementController {
             } else {
                 mainView.showErrorMessage("Không tìm thấy xe với biển số: " + licensePlate);
             }
+        }
+        private ArrayList<Vehicle> getAllVehicle(){
+            ArrayList<Vehicle> vehicles = new ArrayList<>();
+            List<Car> cars = carService.findAll();
+            vehicles.addAll(cars);
+            List<Truck> trucks = truckService.findAll();
+            vehicles.addAll(trucks);
+            List<Motorbike> motorbikes = motorbikeService.findAll();
+            vehicles.addAll(motorbikes);
+            return vehicles;
         }
     }
 

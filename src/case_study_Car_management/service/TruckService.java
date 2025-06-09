@@ -24,9 +24,9 @@ public class TruckService implements ITruckService{
     }
 
     @Override
-    public boolean delete(String vehicleName, String LicensePlate) {
+    public boolean delete( String LicensePlate) {
         try{
-            iTruckRepository.delete(vehicleName,LicensePlate);
+            iTruckRepository.delete(LicensePlate);
             return true;
         }catch (VehicleNotFoundException e){
             return false;

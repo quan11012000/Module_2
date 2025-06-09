@@ -23,10 +23,9 @@ public class MotorbikeRepository implements IMotorbikeRepository{
         writeToFile(PATH,motorbikes);
     }
     @Override
-    public void delete(String motorbikeName, String motorbikeLicensePlate) throws VehicleNotFoundException {
+    public void delete( String motorbikeLicensePlate) throws VehicleNotFoundException {
         for(int i = 0 ; i < motorbikes.size();i++){
-            if(motorbikes.get(i).getVehicleName().equals(motorbikeName)
-                && motorbikes.get(i).getVehicleLicensePlate().equals(motorbikeLicensePlate)){
+            if( motorbikes.get(i).getVehicleLicensePlate().equals(motorbikeLicensePlate)){
                 motorbikes.remove(i);
                 writeToFile(PATH,motorbikes);
                 return;

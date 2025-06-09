@@ -13,7 +13,10 @@ public class FileUtil {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
-                list.add(line);
+                if(!line.isEmpty()){
+                    list.add(line);
+                }
+
             }
         } catch (IOException e) {
             // file chưa tồn tại hoặc lỗi đọc

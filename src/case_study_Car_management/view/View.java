@@ -112,7 +112,7 @@ public class View {
         System.out.println("\n" + "=".repeat(80));
         System.out.println("                        DANH SÁCH XE");
         System.out.println("=".repeat(80));
-        System.out.print("Nhóm xe || ");
+        System.out.print("STT || ");
         System.out.print(" 📝 Tên xe || ");
         System.out.print(" 🎨 Màu xe || ");
         System.out.print(" 💰 Giá xe || ");

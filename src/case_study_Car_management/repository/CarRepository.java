@@ -23,11 +23,10 @@ public class CarRepository implements ICarRepository{
         writeToFile(PATH,cars);
     }
     @Override
-    public void delete(String carName, String carLicensePlate) throws VehicleNotFoundException {
+    public void delete( String carLicensePlate) throws VehicleNotFoundException {
         List<Car> cars = findAll();
         for(int i = 0 ; i < cars.size();i++){
-            if(cars.get(i).getVehicleName().equals(carName)
-                    && cars.get(i).getVehicleLicensePlate().equals(carLicensePlate)){
+            if( cars.get(i).getVehicleLicensePlate().equals(carLicensePlate)){
                 cars.remove(i);
                 writeToFile(PATH,cars);
                 return;
@@ -41,7 +40,6 @@ public class CarRepository implements ICarRepository{
         for(int i = 0 ; i < cars.size();i++){
             if(car.getVehicleLicensePlate().equals(cars.get(i).getVehicleLicensePlate())){
                 cars.set(i,car);
-                writeToFile(PATH,cars);
                 return;
             }
         }

@@ -1,18 +1,16 @@
 package case_study_Car_management.module;
+public abstract class Vehicle {
+    protected String vehicleName;
+    protected String vehicleColor;
+    protected double vehiclePrice;
+    protected String vehicleLicensePlate;
+    protected String vehicleManufacturer;
+    protected String vehicleYearManufacturer;
+    protected String vehicleDescription;
 
-public class Vehicle {
-    private String vehicleName;
-    private String vehicleColor;
-    private double vehiclePrice;
-    private String vehicleLicensePlate;
-    private String vehicleManufacturer;
-    private String vehicleYearManufacturer;
-    private String vehicleDescription;
-    public Vehicle(){
-
-    }
-    public Vehicle(String vehicleName, String vehicleColor, double vehiclePrice, String vehicleLicensePlate,
-                   String vehicleManufacturer, String vehicleYearManufacturer, String vehicleDescription) {
+    public Vehicle(String vehicleName, String vehicleColor, double vehiclePrice,
+                   String vehicleLicensePlate, String vehicleManufacturer,
+                   String vehicleYearManufacturer, String vehicleDescription) {
         this.vehicleName = vehicleName;
         this.vehicleColor = vehicleColor;
         this.vehiclePrice = vehiclePrice;
@@ -21,10 +19,14 @@ public class Vehicle {
         this.vehicleYearManufacturer = vehicleYearManufacturer;
         this.vehicleDescription = vehicleDescription;
     }
-    public String getInfo() {
-        return vehicleName + "," + vehicleColor + "," + vehicleLicensePlate + "," + vehicleManufacturer + ","
-                + vehicleYearManufacturer + "," + vehiclePrice + "," + vehicleDescription;
+
+    public String getInfo(){
+        return String.join(" || ",getVehicleType(), vehicleName, vehicleColor,String.format("%.0f",vehiclePrice) ,
+                vehicleLicensePlate, vehicleManufacturer, vehicleYearManufacturer, vehicleDescription);
     }
+    public abstract String getVehicleType();
+
+    // Getters and Setters
     public String getVehicleName() {
         return vehicleName;
     }
@@ -80,20 +82,8 @@ public class Vehicle {
     public void setVehicleDescription(String vehicleDescription) {
         this.vehicleDescription = vehicleDescription;
     }
-    @Override
-    public String toString(){
-        return "Tên xe: " + vehicleName + ", Màu: " + vehicleColor + ", Biển số: " + vehicleLicensePlate +
-                ", Hãng: " + vehicleManufacturer + ", Năm: " + vehicleYearManufacturer +
-                ", Giá: " + vehiclePrice + ", Mô tả: " + vehicleDescription;
-    }
-    public static Vehicle fromString(String line) {
-        String[] parts = line.split(",");
-        if (parts.length == 7) {
-            return new Motorbike(
-                    parts[0], parts[1], Double.parseDouble(parts[2]), parts[3],
-                    parts[4], parts[5], parts[6]
-            );
-        }
-        return null;
+    public String toCsvLine(){
+        return String.join(",",getVehicleType(), vehicleName, vehicleColor,String.format("%.0f",vehiclePrice) ,
+                vehicleLicensePlate, vehicleManufacturer, vehicleYearManufacturer, vehicleDescription);
     }
 }

@@ -1,6 +1,7 @@
 package case_study_Car_management.repository;
 
 import case_study_Car_management.common.exceptions.VehicleNotFoundException;
+import case_study_Car_management.module.Car;
 import case_study_Car_management.module.Motorbike;
 import case_study_Car_management.module.Truck;
 import case_study_Car_management.util.FileUtil;
@@ -10,7 +11,7 @@ import java.util.List;
 
 public class TruckRepository implements ITruckRepository {
     private List<Truck> trucks = new ArrayList<>();
-    private final String PATH = "truck.cvs";
+    private final String PATH = "E:\\codegym\\module_2\\src\\case_study_Car_management\\data\\trucks.csv";
     public TruckRepository(){
         trucks = readFromFile(PATH);
     }
@@ -57,13 +58,31 @@ public class TruckRepository implements ITruckRepository {
     }
 
     @Override
-    public void writeToFile(String path, List data) {
-        FileUtil.writeText(path, data);
-
+    public List<Truck> readFromFile(String path) {
+        List<String> list = FileUtil.readCsvFile(path);
+        List<Truck> trucks= new ArrayList<>();
+        String[] properties;
+        for (String line:list){
+            properties= line.split(",");
+            trucks.add(new Truck(
+                    properties[0],
+                    properties[1],
+                    Double.parseDouble(properties[2]),
+                    properties[3],
+                    properties[4],
+                    properties[5],
+                    properties[6]
+            ));
+        }
+        return trucks;
     }
 
     @Override
-    public List readFromFile(String path) {
-        return FileUtil.readText(path);
+    public void writeToFile(String path, List<Truck> data) {
+        List<String> lines = new ArrayList<>();
+        for (Truck truck : data){
+            lines.add(truck.toCsvLine());
+        }
+        FileUtil.writeCsvFile(PATH,lines);
     }
 }

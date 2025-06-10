@@ -93,9 +93,7 @@ public class ManagementController {
                 mainView.showAllVehicles(matchedVehicles);
                 break;
         }
-
     }
-
     private void removeVehicle() {
         List<Vehicle> existingVehicles = vehicleService.findAll();
         if (existingVehicles.isEmpty()) {
@@ -121,8 +119,6 @@ public class ManagementController {
             }
         }
     }
-
-
     private void searchVehicle() {
         List<Vehicle> existingVehicles = vehicleService.findAll();
         if (existingVehicles.isEmpty()) {

@@ -85,53 +85,39 @@ public class InputHelper {
             }
         }
     }
-    public String inputLicensePlateWithValidation(String vehicleType, List<Vehicle> vehicles) {
+    public String inputLicensePlateWithValidation(int vehicleTypeId, List<Vehicle> vehicles) {
         String licensePlate;
+        String licensePlateExample = "";
+        String format = "";
+        switch (vehicleTypeId) {
+            case 1:
+            case 2:
+                licensePlateExample = "30A1-12345";
+                format = "^\\d{2}[A-Z]\\d-\\d{5}$";
+                break;
+            case 3:
+                licensePlateExample = "30A-12345";
+                format = "^\\d{2}[A-Z]\\d?-\\d{5}$";
+                break;
+        }
         while (true) {
-            System.out.print("🔑 Nhập biển số xe " + vehicleType + " (VD: 30A1-12345): ");
+            System.out.printf("🔑 Nhập biển số xe (VD: %s): ", licensePlateExample);
             licensePlate = scanner.nextLine().trim().toUpperCase();
-
-            if (!isValidLicensePlateFormat(licensePlate)) {
-                System.out.println("❌ Định dạng không hợp lệ! Ví dụ: 30A1-12345");
+            if (!isValidLicensePlateFormat(licensePlate, format)) {
+                System.out.printf("❌ Định dạng không hợp lệ! Ví dụ: %s\n", licensePlateExample);
                 continue;
             }
-
             if (isDuplicateLicensePlate(licensePlate, vehicles)) {
                 System.out.println("❌ Biển số đã tồn tại trong hệ thống!");
                 continue;
             }
-
             System.out.println("✅ Biển số hợp lệ!");
             break;
         }
         return licensePlate;
     }
-    public String inputLicensePlateWithValidationTruck(String vehicleType, List<Vehicle> vehicles) {
-        String licensePlate;
-        while (true) {
-            System.out.print("🔑 Nhập biển số xe " + vehicleType + " (VD: 30A-12345): ");
-            licensePlate = scanner.nextLine().trim().toUpperCase();
-
-            if (!isValidLicensePlateFormatxxA(licensePlate)) {
-                System.out.println("❌ Định dạng không hợp lệ! Ví dụ: 30A-12345");
-                continue;
-            }
-
-            if (isDuplicateLicensePlate(licensePlate, vehicles)) {
-                System.out.println("❌ Biển số đã tồn tại trong hệ thống!");
-                continue;
-            }
-
-            System.out.println("✅ Biển số hợp lệ!");
-            break;
-        }
-        return licensePlate;
-    }
-    public boolean isValidLicensePlateFormatxxA(String licensePlate) {
-        return licensePlate.matches("^\\d{2}[A-Z]\\d?-\\d{5}$");
-    }
-    public boolean isValidLicensePlateFormat(String licensePlate) {
-        return licensePlate.matches("^\\d{2}[A-Z]\\d-\\d{5}$");
+    public boolean isValidLicensePlateFormat(String licensePlate, String format) {
+        return licensePlate.matches(format);
     }
 
     public boolean isDuplicateLicensePlate(String licensePlate, List<Vehicle> vehicles) {

@@ -24,7 +24,7 @@ public class Vehicle {
 
     public String getInfo() {
         return String.format(
-                "| %-15s | %-20s | %-10s | %-12.0f | %-12s | %-15s | %-4s | %-30s |",
+                "| %-15s | %-20s | %-10s | %-12.0f | %-12s | %-15s | %-4s | %-50s |",
                 vehicleType.getName(), vehicleName, vehicleColor, vehiclePrice,
                 vehicleLicensePlate, vehicleManufacturer, vehicleYearManufacturer, vehicleDescription
         );

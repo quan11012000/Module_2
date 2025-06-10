@@ -19,7 +19,7 @@ public class VehicleView {
         String name = inputHelper.promptValidatedString("Tên xe: ");
         String color = inputHelper.promptValidatedString("Màu xe: ");
         double price = inputHelper.promptDouble("Giá xe (VND): ");
-        String licensePlate = inputHelper.inputLicensePlateWithValidationTruck("ô tô", existingVehicles);
+        String licensePlate = inputHelper.inputLicensePlateWithValidation(vehicleTypeId, existingVehicles);
         String manufacturer = inputHelper.promptValidatedString("Hãng sản xuất: ");
         String year = inputHelper.promptYear("Năm sản xuất: ");
         String description = inputHelper.promptDescription("Mô tả xe: ");

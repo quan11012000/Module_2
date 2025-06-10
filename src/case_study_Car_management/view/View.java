@@ -66,7 +66,7 @@ public class View {
     }
     public static String getTableHeader() {
         return String.format(
-                "| %-15s | %-20s | %-10s | %-12s | %-12s | %-15s | %-4s | %-30s |",
+                "| %-15s | %-20s | %-10s | %-12s | %-12s | %-15s | %-4s | %-50s |",
                 "Loại xe", "Tên xe", "Màu", "Giá", "Biển số", "Hãng", "Năm", "Mô tả"
         );
     }
@@ -95,7 +95,7 @@ public class View {
         System.out.println("                        DANH SÁCH XE");
         System.out.println("=".repeat(80));
         System.out.println(getTableHeader());
-        System.out.println("-".repeat(141));
+        System.out.println("-".repeat(161));
         for (int i = 0; i < vehicles.size(); i++) {
             System.out.println(vehicles.get(i).getInfo());
         }

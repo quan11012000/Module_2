@@ -1,11 +1,8 @@
 package case_study_Car_management.util;
 
-import case_study_Car_management.module.Vehicle;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 
 public class FileUtil {
     public static List<String> readCsvFile(String path) {
@@ -16,7 +13,6 @@ public class FileUtil {
                 if(!line.isEmpty()){
                     list.add(line);
                 }
-
             }
         } catch (IOException e) {
             // file chưa tồn tại hoặc lỗi đọc

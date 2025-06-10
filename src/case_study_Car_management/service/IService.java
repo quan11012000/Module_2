@@ -7,9 +7,7 @@ import java.util.List;
 public interface IService<T> {
     List<T> findAll();
     boolean add(T t);
-    boolean delete(String LicensePlate);
-    boolean edit(T t) throws VehicleNotFoundException;
-    List<T> findByVehicleName(String vehicleName);
-    void writeToFile(String path, List<T> data);
-    List<T> readFromFile(String path);
+    boolean edit(T t);
+
+
 }

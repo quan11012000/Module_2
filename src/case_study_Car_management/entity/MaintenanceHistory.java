@@ -1,4 +1,4 @@
-package case_study_Car_management.module;
+package case_study_Car_management.entity;
 
 public class MaintenanceHistory {
     private String licensePlate;

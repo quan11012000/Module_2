@@ -1,6 +1,6 @@
 package case_study_Car_management.view;
 
-import case_study_Car_management.module.Vehicle;
+import case_study_Car_management.entity.Vehicle;
 
 import java.time.Year;
 import java.util.List;
@@ -78,14 +78,13 @@ public class InputHelper {
                 continue;
             }
             int year = Integer.parseInt(input);
-            if (year < 1900 || year > currentYear) {
-                System.out.printf("❌ Năm phải từ 1900 đến %d!\n", currentYear);
+            if (year < (currentYear-30) || year > currentYear ) {
+                System.out.printf("❌ Năm phải từ %d đến %d!\n",(currentYear-30), currentYear);
             } else {
                 return input;
             }
         }
     }
-
     public String inputLicensePlateWithValidation(String vehicleType, List<Vehicle> vehicles) {
         String licensePlate;
         while (true) {
@@ -107,7 +106,30 @@ public class InputHelper {
         }
         return licensePlate;
     }
+    public String inputLicensePlateWithValidationTruck(String vehicleType, List<Vehicle> vehicles) {
+        String licensePlate;
+        while (true) {
+            System.out.print("🔑 Nhập biển số xe " + vehicleType + " (VD: 30A-12345): ");
+            licensePlate = scanner.nextLine().trim().toUpperCase();
 
+            if (!isValidLicensePlateFormatxxA(licensePlate)) {
+                System.out.println("❌ Định dạng không hợp lệ! Ví dụ: 30A-12345");
+                continue;
+            }
+
+            if (isDuplicateLicensePlate(licensePlate, vehicles)) {
+                System.out.println("❌ Biển số đã tồn tại trong hệ thống!");
+                continue;
+            }
+
+            System.out.println("✅ Biển số hợp lệ!");
+            break;
+        }
+        return licensePlate;
+    }
+    public boolean isValidLicensePlateFormatxxA(String licensePlate) {
+        return licensePlate.matches("^\\d{2}[A-Z]\\d?-\\d{5}$");
+    }
     public boolean isValidLicensePlateFormat(String licensePlate) {
         return licensePlate.matches("^\\d{2}[A-Z]\\d-\\d{5}$");
     }

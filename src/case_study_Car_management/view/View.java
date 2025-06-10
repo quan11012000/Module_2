@@ -1,28 +1,28 @@
 package case_study_Car_management.view;
 import case_study_Car_management.controller.ManagementController;
-import case_study_Car_management.module.Vehicle;
+import case_study_Car_management.entity.Vehicle;
+import case_study_Car_management.entity.VehicleType;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 public class View {
     public static void main(String[] args) {
         new ManagementController().start();
     }
-    private Scanner scanner;
 
+
+    private Scanner scanner;
     public View() {
         scanner = new Scanner(System.in);
     }
-
     public void showWelcome() {
         System.out.println("=== HỆ THỐNG QUẢN LÝ XE ===");
     }
-
     public int showMainMenuAndGetChoice() {
         showMainMenu();
         return getChoice();
     }
-
     private void showMainMenu() {
         System.out.println("\n" + "=".repeat(50));
         System.out.println("                    MENU CHÍNH");
@@ -36,45 +36,27 @@ public class View {
         System.out.println("=".repeat(50));
         System.out.print("Nhập lựa chọn của bạn: ");
     }
+    public int showVehicleTypeMenuAndGetChoice(List<VehicleType> vehicleTypes) {
+        for (VehicleType type: vehicleTypes) {
+            System.out.printf("%d. %s %s\n", type.getId(), type.getIcon(), type.getName());
+        }
+        List<Integer> ids = vehicleTypes.stream().map(v -> v.getId()).toList();
+        int choice;
+        while (true){
+            try {
+                System.out.print("Lựa chọn của bạn: ");
+                choice = Integer.parseInt(scanner.nextLine());
+                if(ids.contains(choice)){
+                    return choice;
+                }else{
+                    System.out.println("Bạn phải nhập lựa chọn nằm trong menu");
+                }
+            }catch (NumberFormatException e){
+                System.out.println("Bạn phải nhập số. Vui lòng nhập lại");
+            }
 
-    public int showVehicleTypeMenuAndGetChoice() {
-        showVehicleTypeMenu();
-        return getChoice();
+        }
     }
-
-    private void showVehicleTypeMenu() {
-        System.out.println("\n" + "=".repeat(40));
-        System.out.println("          CHỌN LOẠI XE");
-        System.out.println("=".repeat(40));
-        System.out.println("1. 🚗 Ô tô");
-        System.out.println("2. 🚛 Xe tải");
-        System.out.println("3. 🏍️  Xe máy");
-        System.out.println("4. ⬅️  Quay lại");
-        System.out.println("=".repeat(40));
-        System.out.print("Chọn loại xe: ");
-    }
-
-    public int showEditAttributeMenuAndGetChoice() {
-        showEditAttributeMenu();
-        return getChoice();
-    }
-
-    private void showEditAttributeMenu() {
-        System.out.println("\n" + "=".repeat(45));
-        System.out.println("        CHỌN THUỘC TÍNH CẦN SỬA");
-        System.out.println("=".repeat(45));
-        System.out.println("1. 📝 Tên xe");
-        System.out.println("2. 🎨 Màu xe");
-        System.out.println("3. 💰 Giá xe");
-        System.out.println("4. 📋 Biển số xe");
-        System.out.println("5. 🏭 Hãng sản xuất");
-        System.out.println("6. 📅 Năm sản xuất");
-        System.out.println("7. 📄 Mô tả xe");
-        System.out.println("8. ⬅️  Quay lại");
-        System.out.println("=".repeat(45));
-        System.out.print("Chọn thuộc tính: ");
-    }
-
     private int getChoice() {
         try {
             return Integer.parseInt(scanner.nextLine());
@@ -82,29 +64,29 @@ public class View {
             return -1;
         }
     }
-
+    public static String getTableHeader() {
+        return String.format(
+                "| %-15s | %-20s | %-10s | %-12s | %-12s | %-15s | %-4s | %-30s |",
+                "Loại xe", "Tên xe", "Màu", "Giá", "Biển số", "Hãng", "Năm", "Mô tả"
+        );
+    }
     public String getInputWithPrompt(String prompt) {
         System.out.print(prompt);
         return scanner.nextLine();
     }
-
     public void showSuccessMessage(String message) {
         System.out.println("✅ " + message);
     }
-
     public void showErrorMessage(String message) {
         System.out.println("❌ " + message);
     }
-
     public void showInvalidChoice() {
         System.out.println("❌ Lựa chọn không hợp lệ! Vui lòng chọn lại.");
     }
-
     public void showExitMessage() {
         System.out.println("Cảm ơn bạn đã sử dụng hệ thống!");
     }
-
-    public void showAllVehicles(ArrayList<Vehicle> vehicles) {
+    public void showAllVehicles(List<Vehicle> vehicles) {
         if (vehicles.isEmpty()) {
             showErrorMessage("Danh sách xe trống!");
             return;
@@ -112,27 +94,37 @@ public class View {
         System.out.println("\n" + "=".repeat(80));
         System.out.println("                        DANH SÁCH XE");
         System.out.println("=".repeat(80));
-        System.out.print("STT || ");
-        System.out.print(" 📝 Tên xe || ");
-        System.out.print(" 🎨 Màu xe || ");
-        System.out.print(" 💰 Giá xe || ");
-        System.out.print(" 📋 Biển số xe || ");
-        System.out.print(" 🏭 Hãng sản xuất || ");
-        System.out.print(" 📅 Năm sản xuất || ");
-        System.out.print(" 📄 Mô tả xe");
-        System.out.println();
+        System.out.println(getTableHeader());
+        System.out.println("-".repeat(141));
         for (int i = 0; i < vehicles.size(); i++) {
             System.out.println(vehicles.get(i).getInfo());
-            System.out.println();
         }
         System.out.println("📊 Tổng số xe: " + vehicles.size());
     }
-
     public void showVehicleToEdit(Vehicle vehicle) {
         System.out.println("\n" + "=".repeat(60));
         System.out.println("           THÔNG TIN XE CẦN SỬA");
         System.out.println("=".repeat(60));
         System.out.println(vehicle.getInfo());
         System.out.println("=".repeat(60));
+    }
+
+    public int selectDisplayType() {
+        System.out.println("\t1. Hiển thị tất cả");
+        System.out.println("\t2. Hiển thị theo loại xe");
+        int choice;
+        while (true) {
+            try {
+                System.out.print("Lựa chọn của bạn: ");
+                choice = Integer.parseInt(scanner.nextLine());
+                if(choice == 1 || choice == 2){
+                    return choice;
+                }else{
+                    System.out.println("Bạn phải nhập lựa chọn nằm trong menu");
+                }
+            }catch (NumberFormatException e){
+                System.out.println("Bạn phải nhập số. Vui lòng nhập lại");
+            }
+        }
     }
 }

@@ -1,6 +1,6 @@
 package case_study_Car_management.repository;
 
-import case_study_Car_management.module.MaintenanceHistory;
+import case_study_Car_management.entity.MaintenanceHistory;
 
 import java.util.List;
 

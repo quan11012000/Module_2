@@ -1,16 +1,17 @@
-package case_study_Car_management.module;
-public abstract class Vehicle {
-    protected String vehicleName;
-    protected String vehicleColor;
-    protected double vehiclePrice;
-    protected String vehicleLicensePlate;
-    protected String vehicleManufacturer;
-    protected String vehicleYearManufacturer;
-    protected String vehicleDescription;
+package case_study_Car_management.entity;
+public class Vehicle {
+    private String vehicleName;
+    private String vehicleColor;
+    private double vehiclePrice;
+    private String vehicleLicensePlate;
+    private String vehicleManufacturer;
+    private String vehicleYearManufacturer;
+    private String vehicleDescription;
+    private int vehicleTypeId;
+    private VehicleType vehicleType;
 
-    public Vehicle(String vehicleName, String vehicleColor, double vehiclePrice,
-                   String vehicleLicensePlate, String vehicleManufacturer,
-                   String vehicleYearManufacturer, String vehicleDescription) {
+    public Vehicle(String vehicleName, String vehicleColor, double vehiclePrice, String vehicleLicensePlate, String vehicleManufacturer,
+                   String vehicleYearManufacturer, String vehicleDescription, int vehicleTypeId) {
         this.vehicleName = vehicleName;
         this.vehicleColor = vehicleColor;
         this.vehiclePrice = vehiclePrice;
@@ -18,15 +19,20 @@ public abstract class Vehicle {
         this.vehicleManufacturer = vehicleManufacturer;
         this.vehicleYearManufacturer = vehicleYearManufacturer;
         this.vehicleDescription = vehicleDescription;
+        this.vehicleTypeId = vehicleTypeId;
     }
 
-    public String getInfo(){
-        return String.join(" || ",getVehicleType(), vehicleName, vehicleColor,String.format("%.0f",vehiclePrice) ,
-                vehicleLicensePlate, vehicleManufacturer, vehicleYearManufacturer, vehicleDescription);
+    public String getInfo() {
+        return String.format(
+                "| %-15s | %-20s | %-10s | %-12.0f | %-12s | %-15s | %-4s | %-30s |",
+                vehicleType.getName(), vehicleName, vehicleColor, vehiclePrice,
+                vehicleLicensePlate, vehicleManufacturer, vehicleYearManufacturer, vehicleDescription
+        );
     }
-    public abstract String getVehicleType();
+
 
     // Getters and Setters
+
     public String getVehicleName() {
         return vehicleName;
     }
@@ -82,8 +88,25 @@ public abstract class Vehicle {
     public void setVehicleDescription(String vehicleDescription) {
         this.vehicleDescription = vehicleDescription;
     }
+
+    public int getVehicleTypeId() {
+        return vehicleTypeId;
+    }
+
+    public void setVehicleTypeId(int vehicleTypeId) {
+        this.vehicleTypeId = vehicleTypeId;
+    }
+
+    public VehicleType getVehicleType() {
+        return vehicleType;
+    }
+
+    public void setVehicleType(VehicleType vehicleType) {
+        this.vehicleType = vehicleType;
+    }
+
     public String toCsvLine(){
         return String.join(",", vehicleName, vehicleColor,String.format("%.0f",vehiclePrice) ,
-                vehicleLicensePlate, vehicleManufacturer, vehicleYearManufacturer, vehicleDescription);
+                vehicleLicensePlate, vehicleManufacturer, vehicleYearManufacturer, vehicleDescription,String.format("%d",vehicleTypeId));
     }
 }

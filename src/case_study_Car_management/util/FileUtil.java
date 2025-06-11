@@ -20,8 +20,8 @@ public class FileUtil {
         return list;
     }
 
-    public static <T> void writeCsvFile(String path, List<String> list) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
+    public static void writeCsvFile(String path, List<String> list,boolean append) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(path,append))) {
             for (String line : list) {
                 bw.write(line);
                 bw.newLine();

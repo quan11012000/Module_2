@@ -20,6 +20,11 @@ public class VehicleTypeRepository implements IVehicleTypeRepository{
     }
 
     @Override
+    public void writeAppendToFile(String path, VehicleType vehicleType) {
+
+    }
+
+    @Override
     public void delete(int id) throws VehicleTypeNotFoundException {
 
     }

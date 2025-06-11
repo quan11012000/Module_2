@@ -7,7 +7,7 @@ import java.util.List;
 public interface IRepository<T> {
     List<T> findAll();
     void add(T t);
-
+    void writeAppendToFile(String path, T t);
     void writeToFile(String path, List<T> data);
     List<T> readFromFile(String path);
 }

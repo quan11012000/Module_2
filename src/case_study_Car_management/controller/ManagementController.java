@@ -6,6 +6,7 @@ import case_study_Car_management.service.IVehicleService;
 import case_study_Car_management.service.IVehicleTypeService;
 import case_study_Car_management.service.VehicleService;
 import case_study_Car_management.service.VehicleTypeService;
+import case_study_Car_management.view.MaintenanceView;
 import case_study_Car_management.view.VehicleView;
 import case_study_Car_management.view.View;
 
@@ -17,6 +18,7 @@ public class ManagementController {
     private final IVehicleTypeService vehicleTypeService = new VehicleTypeService();
     private final VehicleView vehicleView = new VehicleView();
     private final View mainView = new View();
+    private final MaintenanceView maintenanceView = new MaintenanceView();
     public void start() {
         mainView.showWelcome();
         while (true) {
@@ -40,6 +42,9 @@ public class ManagementController {
                 case 6:
                     mainView.showExitMessage();
                     return;
+                case 7:
+                    maintenanceView.showMenu();
+                    break;
                 default:
                     mainView.showInvalidChoice();
             }

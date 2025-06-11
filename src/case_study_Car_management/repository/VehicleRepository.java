@@ -19,9 +19,7 @@ public class VehicleRepository implements IVehicleRepository {
 
     @Override
     public void add(Vehicle vehicle) {
-        List<Vehicle> vehicles = findAll();
-        vehicles.add(vehicle);
-        writeToFile(PATH, vehicles);
+        writeAppendToFile(PATH, vehicle);
     }
 
     @Override
@@ -80,7 +78,14 @@ public class VehicleRepository implements IVehicleRepository {
         for (Vehicle vehicle : data) {
             lines.add(vehicle.toCsvLine());
         }
-        FileUtil.writeCsvFile(PATH, lines);
+        FileUtil.writeCsvFile(PATH, lines,false);
+    }
+
+    @Override
+    public void writeAppendToFile(String path, Vehicle vehicle) {
+        List<String> lines = new ArrayList<>();
+        lines.add(vehicle.toCsvLine());
+        FileUtil.writeCsvFile(PATH, lines,true);
     }
 
     @Override

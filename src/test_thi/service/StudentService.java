@@ -1,0 +1,40 @@
+package test_thi.service;
+
+import ss14_insertion_sort.sorting_advanced.model.student;
+import test_thi.entity.Student;
+import test_thi.repository.IStudenRepository;
+import test_thi.repository.StudentRepository;
+
+import java.util.List;
+
+public class StudentService implements IStudentService {
+    IStudenRepository studentRepository = new StudentRepository();
+    @Override
+    public List<Student> findAll() {
+        return studentRepository.findAll();
+    }
+
+    @Override
+    public boolean add(Student student) {
+       return studentRepository.add(student);
+
+    }
+
+    @Override
+    public boolean update(Student student) {
+       return studentRepository.update(student);
+
+    }
+
+    @Override
+    public boolean delete(int id) {
+        return studentRepository.delete(id);
+
+    }
+
+    @Override
+    public Student findById(int id) {
+       return studentRepository.findById(id);
+
+    }
+}

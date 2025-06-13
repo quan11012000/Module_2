@@ -9,5 +9,4 @@ public interface IRepository<T> {
     boolean delete(int id);
     T findById(int id);
     List<T> findByName(String name);
-
 }

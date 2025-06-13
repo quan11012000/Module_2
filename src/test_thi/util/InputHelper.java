@@ -174,6 +174,32 @@ public class InputHelper {
             }
         }
     }
+    // inputName - Không có default value
+    public static String inputName(String message) {
+        Pattern pattern = Pattern.compile("^[A-Za-zÀ-ỹ\\s]{4,45}$");
+        while (true) {
+            System.out.printf("%s: ", message);
+            String input = scanner.nextLine().trim();
+            if (!pattern.matcher(input).matches()) {
+                System.out.println("Tên không hợp lệ. Chỉ nhập chữ và khoảng trắng, từ 4 đến 45 ký tự.");
+            } else {
+                return input;
+            }
+        }
+    }
+
+    // inputName - Có default value
+    public static String inputName(String message, String defaultValue) {
+        Pattern pattern = Pattern.compile("^[A-Za-zÀ-ỹ\\s]{4,45}$");
+        while (true) {
+            String input = prompt(message, defaultValue);
+            if (!pattern.matcher(input).matches()) {
+                System.out.println("Tên không hợp lệ. Chỉ nhập chữ và khoảng trắng, từ 4 đến 45 ký tự.");
+            } else {
+                return input;
+            }
+        }
+    }
 
     // inputDate
     public static LocalDate inputDate(String message, LocalDate defaultValue, String pattern) {

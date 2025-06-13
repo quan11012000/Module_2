@@ -4,12 +4,11 @@ import test_thi.entity.Student;
 import test_thi.util.ReadWriterFile;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-public class StudentRepository implements IStudenRepository {
-    private final String  PATH = "C:\\code_gym\\Module_2\\src\\test_thi\\data\\student.csv";
+public class StudentRepository implements IStudentRepository {
+    private final String PATH = "C:\\code_gym\\Module_2\\src\\test_thi\\data\\student.csv";
     @Override
     public List<Student> findAll() {
         List<Student> students = new ArrayList<>();
@@ -40,9 +39,8 @@ public class StudentRepository implements IStudenRepository {
     @Override
     public boolean update(Student student) {
         List<Student> students = findAll();
-        Student foundStudent = findById(student.getId());
         for (int i = 0; i < students.size(); i++) {
-            if (foundStudent.getId() == students.get(i).getId()) {
+            if (student.getId() == students.get(i).getId()) {
                 students.set(i, student);
                 ReadWriterFile.writeCsvFile(PATH,students,false);
                 return true;

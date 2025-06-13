@@ -1,14 +1,13 @@
 package test_thi.service;
 
-import ss14_insertion_sort.sorting_advanced.model.student;
 import test_thi.entity.Student;
-import test_thi.repository.IStudenRepository;
+import test_thi.repository.IStudentRepository;
 import test_thi.repository.StudentRepository;
 
 import java.util.List;
 
 public class StudentService implements IStudentService {
-    IStudenRepository studentRepository = new StudentRepository();
+    IStudentRepository studentRepository = new StudentRepository();
     @Override
     public List<Student> findAll() {
         return studentRepository.findAll();

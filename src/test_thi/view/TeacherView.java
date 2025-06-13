@@ -18,17 +18,17 @@ public class TeacherView {
     }
     public Teacher addTeacher(List<Teacher> teachers){
         List<Integer> existingIds = teachers.stream().map(Teacher::getId).toList();
-        int id = InputHelper.inputInt("Nhap id: ",1,10);
+        int id = InputHelper.inputInt("Nhap id ",1,10);
         while (existingIds.contains(id)){
             System.out.println("Id da ton tai");
-            id = InputHelper.inputInt("Nhap id: ",1,10);
+            id = InputHelper.inputInt("Nhap id ",1,10);
         }
-        String name = InputHelper.inputString("Nhap name: ",3,50);
-        int age = InputHelper.inputInt("Nhap age: ",5,30);
-        String address = InputHelper.inputString("Nhap address: ",5,100);
-        String email = InputHelper.inputString("Nhap email: ",5,50);
-        String phone = InputHelper.inputPhone("Nhap phone: ","10");
-        String spec = InputHelper.inputString("Nhap chuyen nganh: ",2,4);
+        String name = InputHelper.inputName("Nhap name ");
+        int age = InputHelper.inputInt("Nhap age ",5,30);
+        String address = InputHelper.inputString("Nhap address ",5,100);
+        String email = InputHelper.inputEmail("Nhap email ");
+        String phone = InputHelper.inputPhone("Nhap phone ","10");
+        String spec = InputHelper.inputString("Nhap chuyen nganh ",2,4);
         return new Teacher(id, name, age, address, email, phone, spec);
     }
     public void displayAllTeacher(List<Teacher> teachers) {
@@ -58,7 +58,7 @@ public class TeacherView {
         System.out.println(existingTeacher);
         System.out.println("\nNhap thong tin moi (Enter de giu nguyen):");
         int id = existingTeacher.getId();
-        String name = InputHelper.inputString("Nhap ten moi", existingTeacher.getName(), 2, 50);
+        String name = InputHelper.inputName("Nhap ten moi");
         int age = InputHelper.inputInt("Nhap tuoi moi", existingTeacher.getAge(), 5, 100);
         String address = InputHelper.inputString("Nhap dia chi moi", existingTeacher.getAddress(), 5, 100);
         String email = InputHelper.inputEmail("Nhap email moi", existingTeacher.getEmail());
@@ -109,24 +109,6 @@ public class TeacherView {
         System.out.println("\n========== XOA GIAO VIEN ==========");
         return InputHelper.inputInt("Nhap ID giao vien can xoa", 1, Integer.MAX_VALUE);
     }
-
-    public void showMessage(String message) {
-        System.out.println("\n" + message);
-    }
-
-    public void showError(String error) {
-        System.out.println("\n[LOIX] " + error);
-    }
-
-    public void showSuccess(String success) {
-        System.out.println("\n[THANH CONG] " + success);
-    }
-
-    public void pause() {
-        System.out.print("\nNhan Enter de tiep tuc...");
-        sc.nextLine();
-    }
-
     public int selectSearchType() {
         System.out.println("1. Tìm kiếm theo id ");
         System.out.println("2. Tim kiếm theo tên ");

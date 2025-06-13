@@ -3,6 +3,7 @@ package test_thi.controller;
 import test_thi.entity.Student;
 import test_thi.service.IStudentService;
 import test_thi.service.StudentService;
+import test_thi.view.CommonView;
 import test_thi.view.StudentView;
 
 import java.util.List;
@@ -41,15 +42,15 @@ public class StudentController {
                     searchStudent();
                     break;
                 case 6:
-                    studentView.showMessage("Thoat quan ly hoc sinh...");
+                    CommonView.showMessage("Thoat quan ly hoc sinh...");
                     isRunning = false;
                     break;
                 default:
-                    studentView.showError("Lua chon khong hop le! Vui long chon lai.");
+                    CommonView.showError("Lua chon khong hop le! Vui long chon lai.");
             }
 
             if (isRunning && choice != 6) {
-                studentView.pause();
+                CommonView.pause();
             }
         }
     }
@@ -59,9 +60,9 @@ public class StudentController {
         Student newStudent = studentView.addStudent(students);
         boolean result = studentService.add(newStudent);
         if (result) {
-            studentView.showSuccess("Them hoc sinh thanh cong!");
+            CommonView.showSuccess("Them hoc sinh thanh cong!");
         } else {
-            studentView.showError("Them hoc sinh that bai! Co loi xay ra");
+            CommonView.showError("Them hoc sinh that bai! Co loi xay ra");
         }
     }
 
@@ -70,7 +71,7 @@ public class StudentController {
             List<Student> students = studentService.findAll();
             studentView.displayAllStudents(students);
         } catch (Exception e) {
-            studentView.showError("Co loi xay ra khi hien thi danh sach: " + e.getMessage());
+            CommonView.showError("Co loi xay ra khi hien thi danh sach: " + e.getMessage());
         }
     }
 
@@ -80,7 +81,7 @@ public class StudentController {
             Student existingStudent = studentService.findById(id);
 
             if (existingStudent == null) {
-                studentView.showError("Khong tim thay hoc sinh voi ID: " + id);
+                CommonView.showError("Khong tim thay hoc sinh voi ID: " + id);
                 return;
             }
 
@@ -88,13 +89,13 @@ public class StudentController {
             if (updatedStudent != null) {
                 boolean result = studentService.update(updatedStudent);
                 if (result) {
-                    studentView.showSuccess("Cap nhat thong tin hoc sinh thanh cong!");
+                    CommonView.showSuccess("Cap nhat thong tin hoc sinh thanh cong!");
                 } else {
-                    studentView.showError("Cap nhat thong tin hoc sinh that bai!");
+                    CommonView.showError("Cap nhat thong tin hoc sinh that bai!");
                 }
             }
         } catch (Exception e) {
-            studentView.showError("Co loi xay ra khi cap nhat hoc sinh: " + e.getMessage());
+            CommonView.showError("Co loi xay ra khi cap nhat hoc sinh: " + e.getMessage());
         }
     }
 
@@ -104,7 +105,7 @@ public class StudentController {
             Student student = studentService.findById(id);
 
             if (student == null) {
-                studentView.showError("Khong tim thay hoc sinh voi ID: " + id);
+                CommonView.showError("Khong tim thay hoc sinh voi ID: " + id);
                 return;
             }
 
@@ -112,15 +113,15 @@ public class StudentController {
             if (confirmed) {
                 boolean result = studentService.delete(id);
                 if (result) {
-                    studentView.showSuccess("Xoa hoc sinh thanh cong!");
+                    CommonView.showSuccess("Xoa hoc sinh thanh cong!");
                 } else {
-                    studentView.showError("Xoa hoc sinh that bai!");
+                    CommonView.showError("Xoa hoc sinh that bai!");
                 }
             } else {
-                studentView.showMessage("Da huy thao tac xoa.");
+                CommonView.showMessage("Da huy thao tac xoa.");
             }
         } catch (Exception e) {
-            studentView.showError("Co loi xay ra khi xoa hoc sinh: " + e.getMessage());
+            CommonView.showError("Co loi xay ra khi xoa hoc sinh: " + e.getMessage());
         }
     }
 

@@ -2,6 +2,7 @@ package test_thi.controller;
 import test_thi.entity.Teacher;
 import test_thi.service.ITeacherService;
 import test_thi.service.TeacherService;
+import test_thi.view.CommonView;
 import test_thi.view.TeacherView;
 import java.util.List;
 
@@ -39,15 +40,15 @@ public class TeacherController {
                     searchTeacher();
                     break;
                 case 6:
-                    teacherView.showMessage("Thoat quan ly giao vien...");
+                    CommonView.showMessage("Thoat quan ly giao vien...");
                     isRunning = false;
                     break;
                 default:
-                    teacherView.showError("Lua chon khong hop le! Vui long chon lai.");
+                    CommonView.showError("Lua chon khong hop le! Vui long chon lai.");
             }
 
             if (isRunning && choice != 6) {
-                teacherView.pause();
+                CommonView.pause();
             }
         }
     }
@@ -57,9 +58,9 @@ public class TeacherController {
         Teacher newTeacher = teacherView.addTeacher(teachers);
         boolean result = teacherService.add(newTeacher);
         if (result) {
-            teacherView.showSuccess("Them giao vien thanh cong!");
+            CommonView.showSuccess("Them giao vien thanh cong!");
         } else {
-            teacherView.showError("Them giao vien that bai! Co loi xay ra");
+            CommonView.showError("Them giao vien that bai! Co loi xay ra");
         }
     }
 
@@ -68,7 +69,7 @@ public class TeacherController {
             List<Teacher> teachers = teacherService.findAll();
             teacherView.displayAllTeacher(teachers);
         } catch (Exception e) {
-            teacherView.showError("Co loi xay ra khi hien thi danh sach: " + e.getMessage());
+            CommonView.showError("Co loi xay ra khi hien thi danh sach: " + e.getMessage());
         }
     }
 
@@ -78,7 +79,7 @@ public class TeacherController {
             Teacher existingTeacher = teacherService.findById(id);
 
             if (existingTeacher == null) {
-                teacherView.showError("Khong tim thay giao vien voi ID: " + id);
+                CommonView.showError("Khong tim thay giao vien voi ID: " + id);
                 return;
             }
 
@@ -86,13 +87,13 @@ public class TeacherController {
             if (updateTeacher != null) {
                 boolean result = teacherService.update(updateTeacher);
                 if (result) {
-                    teacherView.showSuccess("Cap nhat thong tin giao vien thanh cong!");
+                    CommonView.showSuccess("Cap nhat thong tin giao vien thanh cong!");
                 } else {
-                    teacherView.showError("Cap nhat thong tin giao vien that bai!");
+                    CommonView.showError("Cap nhat thong tin giao vien that bai!");
                 }
             }
         } catch (Exception e) {
-            teacherView.showError("Co loi xay ra khi cap nhat hoc sinh: " + e.getMessage());
+            CommonView.showError("Co loi xay ra khi cap nhat hoc sinh: " + e.getMessage());
         }
     }
 
@@ -102,7 +103,7 @@ public class TeacherController {
             Teacher teacher = teacherService.findById(id);
 
             if (teacher == null) {
-                teacherView.showError("Khong tim thay giao vien voi ID: " + id);
+                CommonView.showError("Khong tim thay giao vien voi ID: " + id);
                 return;
             }
 
@@ -110,15 +111,15 @@ public class TeacherController {
             if (confirmed) {
                 boolean result = teacherService.delete(id);
                 if (result) {
-                    teacherView.showSuccess("Xoa giao vien thanh cong!");
+                    CommonView.showSuccess("Xoa giao vien thanh cong!");
                 } else {
-                    teacherView.showError("Xoa giao vien that bai!");
+                    CommonView.showError("Xoa giao vien that bai!");
                 }
             } else {
-                teacherView.showMessage("Da huy thao tac xoa.");
+                CommonView.showMessage("Da huy thao tac xoa.");
             }
         } catch (Exception e) {
-            teacherView.showError("Co loi xay ra khi xoa giao vien: " + e.getMessage());
+            CommonView.showError("Co loi xay ra khi xoa giao vien: " + e.getMessage());
         }
     }
 

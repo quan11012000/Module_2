@@ -67,7 +67,7 @@ public class Person {
     @Override
     public String toString() {
         return String.format(
-                "| %-15s | %-20s | %-10s | %-12.0f | %-12s | %-15s | %-4s | %-50s |",
+                "| %-5d | %-20s | %-3d | %-20s | %-25s | %-12s | %-10s |",
                 id, name, age, address, email, phone
         );
     }

@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class StudentRepository implements IStudenRepository {
-    private final String  PATH = "C:\\code_gym\\Module_2\\src\\test_thi\\data\\person.csv";
+    private final String  PATH = "C:\\code_gym\\Module_2\\src\\test_thi\\data\\student.csv";
     @Override
     public List<Student> findAll() {
         List<Student> students = new ArrayList<>();
@@ -63,15 +63,18 @@ public class StudentRepository implements IStudenRepository {
     }
 
     @Override
-    public List<Student> searchById(int id) {
+    public List<Student> findByName(String name) {
         List<Student> students = findAll();
+        List<Student> result = new ArrayList<>();
         for (Student student : students) {
-            if(student.getId() == id){
-                return students;
+            if (student.getName().toLowerCase().contains(name.toLowerCase()) ) {
+                result.add(student);
             }
         }
-        return null;
+        return result;
     }
+
+
     @Override
     public boolean delete(int id) {
         List<Student> students = findAll();

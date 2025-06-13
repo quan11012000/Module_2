@@ -1,5 +1,7 @@
 package test_thi.util;
 
+import test_thi.entity.Person;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +21,10 @@ public class ReadWriterFile {
         }
         return list;
     }
-    public static <T> void writeCsvFile(String path, List<T> list ,boolean append) {
+    public static <T extends Person> void writeCsvFile(String path, List<T> list , boolean append) {
         List<String> lines = new ArrayList<>();
         for (T item : list) {
-            lines.add(item.toString());
+            lines.add(item.toCsvLine());
         }
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path,append))) {
             for (String line : lines) {

@@ -1,32 +1,42 @@
 package test_thi.service;
 
 import test_thi.entity.Student;
+import test_thi.entity.Teacher;
+import test_thi.repository.ITeacherRepository;
+import test_thi.repository.TeacherRepository;
 
 import java.util.List;
 
-public class TeacherService implements IStudentService {
+public class TeacherService implements ITeacherService {
+    ITeacherRepository teacherRepository= new TeacherRepository();
+
     @Override
-    public List<Student> findAll() {
-        return List.of();
+    public List<Teacher> findAll() {
+        return teacherRepository.findAll();
     }
 
     @Override
-    public boolean add(Student student) {
-        return false;
+    public boolean add(Teacher teacher) {
+        return teacherRepository.add(teacher);
     }
 
     @Override
-    public boolean update(Student student) {
-        return false;
+    public boolean update(Teacher teacher) {
+        return teacherRepository.update(teacher);
     }
 
     @Override
     public boolean delete(int id) {
-        return false;
+        return teacherRepository.delete(id);
     }
 
     @Override
-    public Student findById(int id) {
-        return null;
+    public Teacher findById(int id) {
+        return teacherRepository.findById(id);
+    }
+
+    @Override
+    public List<Teacher> findByName(String name) {
+       return teacherRepository.findByName(name);
     }
 }

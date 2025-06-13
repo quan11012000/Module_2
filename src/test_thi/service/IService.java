@@ -8,4 +8,5 @@ public interface IService<T> {
     boolean update(T t);
     boolean delete(int id);
     T findById(int id);
+    List<T> findByName(String name);
 }
